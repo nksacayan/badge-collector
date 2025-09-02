@@ -1,9 +1,11 @@
 import './BadgeCard.css';
+import { useNavigate } from 'react-router';
+
 
 const BadgeCard = ({ badge }) => {
+	const navigate = useNavigate();
 	const handleClick = () => {
-		alert(`Badge: ${badge.name}`);
-		// Later: navigate to /badge/:id or open modal
+		navigate(`/badge/${badge.id}`);
 	};
 
 	return (
