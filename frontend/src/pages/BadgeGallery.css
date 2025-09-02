@@ -1,0 +1,18 @@
+.gallery-container {
+	text-align: center;
+	padding: 2rem;
+}
+
+.leaderboard-link {
+	color: blue;
+	text-decoration: underline;
+	margin-bottom: 1rem;
+	display: inline-block;
+}
+
+.badge-grid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 1.5rem;
+	margin-top: 2rem;
+}

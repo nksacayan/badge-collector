@@ -1,0 +1,32 @@
+.badge-card {
+	cursor: pointer;
+	text-align: center;
+	padding: 1rem;
+	border-radius: 8px;
+	transition: transform 0.2s;
+}
+
+.badge-card:hover {
+	transform: scale(1.05);
+}
+
+.badge-circle {
+	width: 80px;
+	height: 80px;
+	margin: 0 auto 0.5rem;
+	border-radius: 50%;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.earned .badge-circle {
+	background-color: black;
+	color: white;
+}
+
+.locked .badge-circle {
+	background-color: lightgray;
+	color: gray;
+}

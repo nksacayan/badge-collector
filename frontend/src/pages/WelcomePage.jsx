@@ -1,15 +1,16 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router";
 import './WelcomePage.css';
 
 const WelcomePage = () => {
 	const [name, setName] = useState('');
+	let navigate = useNavigate();
 
 	const handleSubmit = () => {
-		if (name.trim()) {
-			// Save name to localStorage or context (for now)
-			localStorage.setItem('username', name);
-			// navigate('/badges');
-		}
+		// if (name.trim()) {
+		// 	localStorage.setItem('username', name);
+		// }
+		navigate('/badges');
 	};
 
 	return (
