@@ -3,4 +3,6 @@ Patch collector client for bday project
 
 Don't forget to use nvm to sync node across workspace and use good npm package habits
 
+Use sdkman for backend version manager
+
 Use WSL at home for compatability with nvm
