@@ -2,7 +2,6 @@ package com.nsac.badgecollectorserver;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,7 +10,6 @@ public class AppController {
 
     private final UserRepository userRepository;
 
-    @Autowired
     public AppController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -20,4 +18,16 @@ public class AppController {
     public List<User> users() {
         return userRepository.findAll();
     }
+
+    // user exists
+
+    // register user
+
+    // login user
+
+    // add badge to user
+
+    // get all badges
+
+    // get badge
 }
