@@ -1,6 +1,6 @@
--- samples
-INSERT INTO users (id, name) VALUES (1, 'Nick');
-INSERT INTO users (id, name) VALUES (2, 'Angela');
+INSERT INTO users (id, name) VALUES 
+  (1, 'Nick'),
+  (2, 'Angela');
 
 INSERT INTO badges (id, name, description) VALUES
   (101, 'Veteran Collector', 'Awarded for collecting 100 unique items.'),
