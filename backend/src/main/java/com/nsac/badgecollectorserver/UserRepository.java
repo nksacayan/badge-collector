@@ -37,15 +37,6 @@ public class UserRepository {
         return users;
     }
 
-    public boolean userExists(String name) {
-        Integer count = jdbcTemplate.queryForObject(
-            "SELECT COUNT(*) FROM users WHERE name = ?",
-            Integer.class,
-            name
-        );
-        return count != null && count > 0;
-    }
-
     public User createUser(String name) {
         // Insert user and get generated id
         jdbcTemplate.update("INSERT INTO users (name) VALUES (?)", name);

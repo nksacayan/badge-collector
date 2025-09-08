@@ -23,20 +23,14 @@ public class AppController {
         return userRepository.findAll();
     }
 
-    // user exists
-    @GetMapping("/user/exists")
-    public Boolean userExists(@RequestParam String name) {
-        return userRepository.userExists(name);
-    }
-
-    // register user
+    // create user
     @GetMapping("/user/create")
     public User createUser(@RequestParam String name) {
         return userRepository.createUser(name);
     }
 
-    // login user
-    @GetMapping("/user/login")
+    // get user
+    @GetMapping("/user")
     public User loginUser(@RequestParam String name) {
         return userRepository.getUser(name);
     }
