@@ -89,4 +89,23 @@ public class UserRepository {
     public User getUser(String name) {
         return getUserBy("name", name);
     }
+
+    public User addBadgeToUser(int userId, int badgeId) {
+            // Insert badge for user if not already present
+            Integer count = jdbcTemplate.queryForObject(
+                "SELECT COUNT(*) FROM user_badges WHERE user_id = ? AND badge_id = ?",
+                Integer.class,
+                userId,
+                badgeId
+            );
+            if (count == null || count == 0) {
+                jdbcTemplate.update(
+                    "INSERT INTO user_badges (user_id, badge_id) VALUES (?, ?)",
+                    userId,
+                    badgeId
+                );
+            }
+            // Return updated user
+            return getUser(userId);
+    }
 }
