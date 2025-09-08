@@ -14,7 +14,7 @@ public class BadgeRepository {
     private JdbcTemplate jdbcTemplate;
 
     public java.util.List<Badge> findAll() {
-        String sql = "SELECT id, name, description FROM badge";
+        String sql = "SELECT id, name, description FROM badges";
         return jdbcTemplate.query(sql, (rs, _) ->
             new Badge(
                 rs.getInt("id"),
@@ -25,7 +25,7 @@ public class BadgeRepository {
     }
 
     private List<Badge> getBadgeBy(String column, Object value) {
-    String sql = "SELECT id, name, description FROM badge WHERE " + column + " = ?";
+    String sql = "SELECT id, name, description FROM badges WHERE " + column + " = ?";
     return jdbcTemplate.query(sql, badgeRowMapper(), value);
 }
 
