@@ -36,7 +36,7 @@ public class AppController {
     }
 
     // add badge to user
-    @GetMapping("/user/addBadge")
+    @GetMapping("/user/add-badge")
     public User addBadgeToUser(@RequestParam int userId, @RequestParam int badgeId) {
         return userRepository.addBadgeToUser(userId, badgeId);
     }
