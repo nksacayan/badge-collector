@@ -2,6 +2,7 @@ package com.nsac.badgecollectorserver;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,37 +23,55 @@ public class AppController {
     }
 
     @GetMapping("/users")
-    public List<User> users() {
-        return userRepository.findAll();
+    public ResponseEntity<List<User>> users() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
     }
 
     // create user
     @GetMapping("/user/create")
-    public User createUser(@RequestParam String name) {
-        return userRepository.createUser(name);
+    public ResponseEntity<User> createUser(@RequestParam String name) {
+        User user = userRepository.createUser(name);
+        return ResponseEntity.ok(user);
     }
 
     // get user
     @GetMapping("/user")
-    public User loginUser(@RequestParam String name) {
-        return userRepository.getUser(name);
+    public ResponseEntity<User> loginUser(@RequestParam String name) {
+        User user = userRepository.getUser(name);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // add badge to user
     @GetMapping("/user/add-badge")
-    public User addBadgeToUser(@RequestParam int userId, @RequestParam int badgeId) {
-        return userRepository.addBadgeToUser(userId, badgeId);
+    public ResponseEntity<User> addBadgeToUser(@RequestParam int userId, @RequestParam int badgeId) {
+        User user = userRepository.addBadgeToUser(userId, badgeId);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // get all badges
     @GetMapping("/badges")
-    public List<Badge> getAllBadges() {
-        return badgeRepository.findAll();
+    public ResponseEntity<List<Badge>> getAllBadges() {
+        List<Badge> badges = badgeRepository.findAll();
+        return ResponseEntity.ok(badges);
     }
 
     // get badge
     @GetMapping("/badge")
-    public List<Badge> getBadge(@RequestParam int id) {
-        return badgeRepository.getBadge(id);
+    public ResponseEntity<List<Badge>> getBadge(@RequestParam int id) {
+        List<Badge> badges = badgeRepository.getBadge(id);
+        if (badges != null && !badges.isEmpty()) {
+            return ResponseEntity.ok(badges);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
