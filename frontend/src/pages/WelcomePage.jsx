@@ -36,8 +36,10 @@ const WelcomePage = () => {
 
 	return (
 		<div className="welcome-container">
-			<h1 className="welcome-title">Nick & Angela</h1>
-			<h2 className="welcome-subtitle">Scout Jamboree</h2>
+			<header className="title-block">
+				<h1 className="title-sub">Nick &amp; Angela’s</h1>
+				<h2 className="title-main">SCOUT JAMBOREE</h2>
+			</header>
 
 			<div className="illustration-placeholder">
 				cutie cat illustration here<br />(still need to draw – will provide as PNG)
