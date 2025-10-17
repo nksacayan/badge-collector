@@ -13,9 +13,6 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: #fff8e1;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
