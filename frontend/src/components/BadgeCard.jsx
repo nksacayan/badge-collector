@@ -1,7 +1,6 @@
 import './BadgeCard.css';
 import { useNavigate } from 'react-router';
 
-
 const BadgeCard = ({ badge }) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
@@ -10,11 +9,11 @@ const BadgeCard = ({ badge }) => {
 
 	return (
 		<div
-			className={`badge-card ${badge.earned ? 'earned' : 'locked'}`}
+			className={`badge-card badge-${badge.color} ${badge.earned ? 'earned' : 'locked'}`}
 			onClick={handleClick}
 		>
 			<div className="badge-circle">
-				{badge.earned ? '🏅' : '🔒'}
+				❤️
 			</div>
 			<p>{badge.name}</p>
 		</div>

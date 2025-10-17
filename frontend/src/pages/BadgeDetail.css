@@ -1,44 +1,78 @@
 .badge-detail-container {
+	background-color: #f5f0e6;
 	padding: 2rem;
 	max-width: 600px;
 	margin: 0 auto;
 	text-align: center;
-	font-family: sans-serif;
+	font-family: 'Comic Sans MS', cursive, sans-serif;
 }
 
 .back-button {
-	font-size: 1.5rem;
-	background: none;
+	background-color: #66bb6a;
+	color: white;
 	border: none;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	border-radius: 8px;
 	cursor: pointer;
 	margin-bottom: 1rem;
+}
+
+.badge-circle {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	font-size: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1.5rem auto;
+}
+
+/* Color variants */
+.badge-red {
+	background-color: #ef9a9a;
+	color: #b71c1c;
+}
+
+.badge-green {
+	background-color: #a5d6a7;
+	color: #1b5e20;
+}
+
+.badge-yellow {
+	background-color: #fff59d;
+	color: #fbc02d;
+}
+
+.badge-blue {
+	background-color: #90caf9;
+	color: #0d47a1;
+}
+
+.badge-brown {
+	background-color: #bcaaa4;
+	color: #4e342e;
+}
+
+.badge-pink {
+	background-color: #f8bbd0;
+	color: #ad1457;
 }
 
 .badge-name {
 	font-size: 2rem;
 	font-weight: bold;
 	margin-bottom: 1rem;
-	text-transform: lowercase;
-}
-
-.badge-circle {
-	width: 150px;
-	height: 150px;
-	background-color: black;
-	border-radius: 50%;
-	margin: 1rem auto;
-}
-
-.badge-title {
-	font-size: 1.5rem;
-	font-weight: bold;
-	margin: 1rem 0;
-	text-transform: lowercase;
+	color: #5d4037;
 }
 
 .badge-description {
-	font-size: 0.9rem;
-	line-height: 1.4;
+	font-size: 1rem;
+	line-height: 1.5;
+	color: #4e342e;
 	text-align: left;
 	white-space: pre-wrap;
+	margin: 0 auto;
+	max-width: 500px;
 }

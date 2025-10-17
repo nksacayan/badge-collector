@@ -1,18 +1,46 @@
 .gallery-container {
 	text-align: center;
 	padding: 2rem;
+	font-family: 'Comic Sans MS', cursive, sans-serif;
+	background-color: #fff8e1;
 }
 
-.leaderboard-link {
-	color: blue;
-	text-decoration: underline;
-	margin-bottom: 1rem;
+.badge-welcome {
+	font-size: 1.5rem;
+	color: #388e3c;
+	margin: 0;
+}
+
+.badge-subtitle {
+	font-size: 2rem;
+	font-weight: bold;
+	margin: 0.5rem 0 1.5rem;
+	color: #d32f2f;
+}
+
+.leaderboard-button {
+	background-color: #66bb6a;
+	color: white;
+	border: none;
+	padding: 0.5rem 1rem;
+	font-size: 1rem;
+	border-radius: 8px;
+	cursor: pointer;
+	text-decoration: none;
 	display: inline-block;
+	margin-bottom: 1rem;
+}
+
+.badge-instruction {
+	font-size: 0.9rem;
+	color: #757575;
+	margin-bottom: 1rem;
 }
 
 .badge-grid {
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	gap: 1.5rem;
-	margin-top: 2rem;
+	grid-template-columns: repeat(2, 100px);
+	grid-template-rows: repeat(3, 100px);
+	gap: 1rem;
+	justify-content: center;
 }

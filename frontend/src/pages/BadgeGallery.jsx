@@ -3,20 +3,22 @@ import BadgeCard from '../components/BadgeCard';
 import './BadgeGallery.css';
 
 const mockBadges = [
-	{ id: 1, name: 'Firestarter', earned: true },
-	{ id: 2, name: 'Trailblazer', earned: true },
-	{ id: 3, name: 'Tent Titan', earned: false },
-	{ id: 4, name: 'Compass Commander', earned: false },
-	{ id: 5, name: 'S’more Specialist', earned: false },
-	{ id: 6, name: 'Scout Supreme', earned: true },
+	{ id: 1, name: 'Firestarter', earned: true, color: 'red' },
+	{ id: 2, name: 'Trailblazer', earned: true, color: 'green' },
+	{ id: 3, name: 'Tent Titan', earned: false, color: 'yellow' },
+	{ id: 4, name: 'Compass Commander', earned: false, color: 'blue' },
+	{ id: 5, name: 'S’more Specialist', earned: false, color: 'brown' },
+	{ id: 6, name: 'Scout Supreme', earned: true, color: 'pink' },
 ];
 
 const BadgeGallery = () => {
 	return (
 		<div className="gallery-container">
-			<h1>Your Badges</h1>
-			{/* <Link to="/leaderboard" className="leaderboard-link">leaderboard</Link> */}
-			<p><em>click the badge for details</em></p>
+			<h2 className="badge-welcome">WELCOME, Nick</h2>
+			<h3 className="badge-subtitle">YOUR BADGES</h3>
+
+			<Link to="/leaderboard" className="leaderboard-button">Leaderboard &gt;</Link>
+			<p className="badge-instruction">Click badge for details!</p>
 
 			<div className="badge-grid">
 				{mockBadges.map(badge => (
