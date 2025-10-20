@@ -8,14 +8,12 @@ const BadgeCard = ({ badge }) => {
 	};
 
 	return (
+		// This will be a clickable icon down the road
 		<div
 			className={`badge-card badge-${badge.color} ${badge.earned ? 'earned' : 'locked'}`}
 			onClick={handleClick}
 		>
-			<div className="badge-circle">
-				❤️
-			</div>
-			<p>{badge.name}</p>
+			<p>❤️</p>
 		</div>
 	);
 };

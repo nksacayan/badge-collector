@@ -37,8 +37,8 @@
 
 .badge-grid {
 	display: grid;
-	grid-template-columns: repeat(2, 100px);
-	grid-template-rows: repeat(3, 100px);
+	grid-template-columns: repeat(3, 100px);
+	grid-auto-rows: 100px;
 	gap: 1rem;
 	justify-content: center;
 }
