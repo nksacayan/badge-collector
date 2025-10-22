@@ -14,3 +14,5 @@ localhost:8080 is default
 
 To start the frontend in dev:
 npm run dev
+
+To make wsl -> windows -> lan reachable u gotta route wsl to windows and then make the firewall rules. Will have to do on any dev device. Might be easier at the end when im using a build binary
