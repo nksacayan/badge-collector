@@ -58,27 +58,38 @@
 }
 
 .name-input-group input {
-	padding: 0.75rem;
-	font-size: 1rem;
-	width: 220px;
-	border: 2px solid #ccc;
-	border-radius: 8px;
+  width: 240px;
+  height: 48px;
+  padding: 0 16px;
+  border: 2px solid #5c3a21; /* dark brown */
+  border-radius: 24px;
+  color: #5c3a21;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+
 }
 
+.name-input-group input::placeholder {
+  color: #b08b6f; /* light brown */
+  font-weight: 500;
+}
+
+
 .name-input-group button {
-	background-color: #66bb6a;
-	border: none;
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #4CAF50; /* green */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
 }
 
 .name-input-group button::before {
-	content: '➔';
-	font-size: 1.5rem;
-	color: white;
+  content: '➔'; /* Unicode arrow */
+  color: white;
+  font-size: 20px;
 }
