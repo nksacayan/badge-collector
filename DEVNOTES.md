@@ -48,3 +48,26 @@ Spring Boot:
 - ✅ No cookies required
 - ✅ Works on any LAN device with a browser
 - ✅ Easy to reset or rotate tokens if needed
+
+---
+
+For NFC token:
+
+🧩 Options to inject identity into NFC-triggered requests
+✅ Option 1: Use a frontend redirector
+NFC tag points to frontend, not backend:
+http://192.168.1.69:3000/scan?badgeId=XYZ123
+
+
+Your frontend:
+- Reads badgeId from the URL
+- Checks if the user is logged in (token in memory or localStorage)
+- Sends a fetch to the backend with Authorization: Bearer <token> and badgeId
+This way, the browser injects the token because it’s running your app.
+Pros:
+- Works with your existing token-based auth
+- No need to modify NFC tags later
+- You control the UX (can show feedback, errors, etc.)
+Cons:
+- Requires users to be logged in before scanning
+- If they scan from outside your app, it won’t work
