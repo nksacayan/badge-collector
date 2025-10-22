@@ -37,7 +37,7 @@ const WelcomePage = () => {
 
 	return (
 		<div className="welcome-container">
-			<img src={logo} alt="Logo" />
+			<img id="title-logo" src={logo} alt="Logo" />
 
 			<div className="illustration-placeholder">
 				cutie cat illustration here<br />(still need to draw – will provide as PNG)
