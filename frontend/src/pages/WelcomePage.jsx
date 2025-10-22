@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from '../components/UserContext';
 import './WelcomePage.css';
 import logo from '../assets/Scout_Logo.png';
+import charmander from '../assets/tracing_charmander_square.JPG';
 
 const WelcomePage = () => {
 	const [name, setName] = useState('');
@@ -39,12 +40,11 @@ const WelcomePage = () => {
 		<div className="welcome-container">
 			<img id="title-logo" src={logo} alt="Logo" />
 
-			<div className="illustration-placeholder">
-				cutie cat illustration here<br />(still need to draw – will provide as PNG)
-			</div>
+			<img id="cat-icon" src={charmander} alt="Icon" />
 
 			<div className="name-input-group">
 				<input
+					id="name-input"
 					type="text"
 					placeholder="Name"
 					value={name}
