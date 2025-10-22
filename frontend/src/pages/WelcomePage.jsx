@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from "react-router";
 import { UserContext } from '../components/UserContext';
 import './WelcomePage.css';
+import logo from '../assets/Scout_Logo.png';
 
 const WelcomePage = () => {
 	const [name, setName] = useState('');
@@ -36,10 +37,7 @@ const WelcomePage = () => {
 
 	return (
 		<div className="welcome-container">
-			<header className="title-block">
-				<h1 className="title-sub">Nick &amp; Angela’s</h1>
-				<h2 className="title-main">SCOUT JAMBOREE</h2>
-			</header>
+			<img src={logo} alt="Logo" />
 
 			<div className="illustration-placeholder">
 				cutie cat illustration here<br />(still need to draw – will provide as PNG)
@@ -52,7 +50,9 @@ const WelcomePage = () => {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
-				<button onClick={handleSubmit}></button>
+				<button onClick={handleSubmit}>
+					&gt;
+				</button>
 			</div>
 		</div>
 	);

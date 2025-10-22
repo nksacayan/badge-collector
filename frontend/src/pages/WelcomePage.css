@@ -11,31 +11,10 @@
 	min-height: 100vh;
 }
 
-/* Title block */
-.title-block {
-	margin-bottom: 1.5rem;
-}
-
-.title-sub {
-	font-size: 2rem;
-	font-style: italic;
-	color: #d32f2f;
-	margin: 0;
-}
-
-.title-main {
-	font-size: 3rem;
-	font-weight: 900;
-	text-transform: uppercase;
-	color: #5d4037;
-	margin: 0.25rem 0 0;
-}
-
 /* Illustration placeholder */
 .illustration-placeholder {
 	width: 250px;
 	height: 250px;
-	/* square aspect ratio */
 	background-color: #90caf9;
 	color: white;
 	display: flex;
@@ -43,7 +22,6 @@
 	justify-content: center;
 	font-size: 1rem;
 	margin: 30px auto;
-	border-radius: 12px;
 	line-height: 1.4;
 	text-align: center;
 }
@@ -58,38 +36,35 @@
 }
 
 .name-input-group input {
-  width: 240px;
-  height: 48px;
-  padding: 0 16px;
-  border: 2px solid #5c3a21; /* dark brown */
-  border-radius: 24px;
-  color: #5c3a21;
-  font-size: 16px;
-  text-align: center;
-  outline: none;
+	width: 240px;
+	height: 48px;
+	padding: 0 16px;
+	border: 2px solid #5c3a21;
+	/* dark brown */
+	border-radius: 24px;
+	color: #5c3a21;
+	background-color: transparent;
+	font-size: 16px;
+	text-align: center;
+	outline: none;
 
 }
 
 .name-input-group input::placeholder {
-  color: #b08b6f; /* light brown */
-  font-weight: 500;
+	color: #42120C80;
+	font-weight: 500;
 }
 
 
 .name-input-group button {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background-color: #4CAF50; /* green */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: none;
-}
-
-.name-input-group button::before {
-  content: '➔'; /* Unicode arrow */
-  color: white;
-  font-size: 20px;
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	background-color: #1A633C;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	border: none;
+	color: white;
 }
