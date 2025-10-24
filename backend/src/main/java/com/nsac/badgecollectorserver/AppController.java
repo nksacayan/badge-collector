@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,15 +28,15 @@ public class AppController {
     }
 
     // create user
-    @GetMapping("/user/create")
-    public ResponseEntity<User> createUser(@RequestParam String name) {
+    @GetMapping("/user/create/{name}")
+    public ResponseEntity<User> createUser(@PathVariable("name") String name) {
         User user = userRepository.createUser(name);
         return ResponseEntity.ok(user);
     }
 
     // get user
-    @GetMapping("/user")
-    public ResponseEntity<User> loginUser(@RequestParam String name) {
+    @GetMapping("/user/{name}")
+    public ResponseEntity<User> loginUser(@PathVariable("name") String name) {
         User user = userRepository.getUser(name);
         if (user != null) {
             return ResponseEntity.ok(user);
@@ -44,9 +45,10 @@ public class AppController {
         }
     }
 
+    // Fix later
     // add badge to user
-    @GetMapping("/user/add-badge")
-    public ResponseEntity<User> addBadgeToUser(@RequestParam int userId, @RequestParam int badgeId) {
+    @GetMapping("/user/{user}/add-badge/{badgeId}")
+    public ResponseEntity<User> addBadgeToUser(@PathVariable int userId, @RequestParam int badgeId) {
         User user = userRepository.addBadgeToUser(userId, badgeId);
         if (user != null) {
             return ResponseEntity.ok(user);

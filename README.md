@@ -26,3 +26,5 @@ New-NetFirewallRule -DisplayName "WSL Spring Boot" -Direction Inbound -LocalPort
 New-NetFirewallRule -DisplayName "WSL React Dev" -Direction Inbound -LocalPort 5173 -Protocol TCP -Action Allow
 
 automate this later it doesnt persist between boots
+
+.env is on the repo flmao dont put anything bad in there
