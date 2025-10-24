@@ -16,3 +16,13 @@ To start the frontend in dev:
 npm run dev
 
 To make wsl -> windows -> lan reachable u gotta route wsl to windows and then make the firewall rules. Will have to do on any dev device. Might be easier at the end when im using a build binary
+
+wsl hostname -I
+
+netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=<WSL_IP>
+netsh interface portproxy add v4tov4 listenport=5173 listenaddress=0.0.0.0 connectport=5173 connectaddress=<WSL_IP>
+
+New-NetFirewallRule -DisplayName "WSL Spring Boot" -Direction Inbound -LocalPort 8080 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "WSL React Dev" -Direction Inbound -LocalPort 5173 -Protocol TCP -Action Allow
+
+automate this later it doesnt persist between boots
