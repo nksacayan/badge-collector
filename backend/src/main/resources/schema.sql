@@ -13,6 +13,8 @@ CREATE TABLE badges (
 CREATE TABLE user_badges (
   user_id INT NOT NULL,
   badge_id INT NOT NULL,
+  acquired_at TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (user_id, badge_id),
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (badge_id) REFERENCES badges(id)

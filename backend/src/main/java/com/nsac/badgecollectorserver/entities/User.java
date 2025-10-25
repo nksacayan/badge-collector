@@ -1,5 +1,6 @@
 package com.nsac.badgecollectorserver.entities;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,32 +8,38 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
     private Integer id;
     private String name;
-    @ManyToMany
-    @JoinTable(
-        name = "user_badges",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "badge_id")
-    )
+    @OneToMany(mappedBy = "user")
     @Builder.Default
-    private Set<Badge> badges = new HashSet<>();
+    private Set<UserBadge> userBadges = new HashSet<>();
 
     public void addBadge(Badge badge) {
-        badges.add(badge);
+        UserBadge userBadge = UserBadge.builder()
+            .id(new UserBadgeId(this.getId(), badge.getId()))
+            .user(this)
+            .badge(badge)
+            .acquiredAt(LocalDateTime.now())
+            .build();
+        userBadges.add(userBadge);
     }
 }
