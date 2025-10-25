@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nsac.badgecollectorserver.entities.Badge;
-import com.nsac.badgecollectorserver.entities.User;
-import com.nsac.badgecollectorserver.repositories.BadgeRepository;
-import com.nsac.badgecollectorserver.repositories.UserRepository;
+import com.nsac.badgecollectorserver.models.BadgeDTO;
+import com.nsac.badgecollectorserver.models.UserDTO;
+import com.nsac.badgecollectorserver.services.BadgeService;
+import com.nsac.badgecollectorserver.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,54 +22,48 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api")
 public class AppController {
 
-    private final UserRepository userRepository;
-    private final BadgeRepository badgeRepository;
+    private final UserService userService;
+    private final BadgeService badgeService;
 
     @GetMapping("/users")
-    public ResponseEntity<List<User>> users() {
-        List<User> users = userRepository.findAll();
-        return ResponseEntity.ok(users);
+    public ResponseEntity<List<UserDTO>> users() {
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
-    // create user
     @PostMapping("/user/{name}")
-    public ResponseEntity<User> createUser(@PathVariable String name) {
-        User user = User.builder().name(name).build();
-        return ResponseEntity.ok(userRepository.save(user));
+    public ResponseEntity<UserDTO> createUser(@PathVariable String name) {
+        return ResponseEntity.ok(userService.createUser(name));
     }
 
-    // get user
     @GetMapping("/user/{name}")
-    public ResponseEntity<User> loginUser(@PathVariable String name) {
-        return userRepository.findByName(name)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<UserDTO> loginUser(@PathVariable String name) {
+        try {
+            return ResponseEntity.ok(userService.findUserByName(name));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // add badge to user
     @GetMapping("/user/{userId}/add-badge/{badgeId}")
-    public ResponseEntity<User> addBadgeToUser(@PathVariable int userId, @PathVariable int badgeId) {
-        return userRepository.findById(userId)
-                .flatMap(user -> badgeRepository.findById(badgeId)
-                        .map(badge -> {
-                            user.addBadge(badge);
-                            return ResponseEntity.ok(userRepository.save(user));
-                        }))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<UserDTO> addBadgeToUser(@PathVariable int userId, @PathVariable int badgeId) {
+        try {
+            return ResponseEntity.ok(userService.addBadgeToUser(userId, badgeId));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    // get all badges
     @GetMapping("/badges")
-    public ResponseEntity<List<Badge>> getAllBadges() {
-        List<Badge> badges = badgeRepository.findAll();
-        return ResponseEntity.ok(badges);
+    public ResponseEntity<List<BadgeDTO>> getAllBadges() {
+        return ResponseEntity.ok(badgeService.getAllBadges());
     }
 
-    // get badge
     @GetMapping("/badge")
-    public ResponseEntity<Badge> getBadge(@RequestParam int id) {
-        return badgeRepository.findById(id)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<BadgeDTO> getBadge(@RequestParam int id) {
+        try {
+            return ResponseEntity.ok(badgeService.getBadgeById(id));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
