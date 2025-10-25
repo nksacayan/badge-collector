@@ -31,31 +31,28 @@ public class AppController {
     // create user
     @PostMapping("/user/{name}")
     public ResponseEntity<User> createUser(@PathVariable String name) {
-        User user = userRepository.createUser(name);
-        return ResponseEntity.ok(user);
+        User user = new User(name);
+        return ResponseEntity.ok(userRepository.save(user));
     }
 
     // get user
     @GetMapping("/user/{name}")
     public ResponseEntity<User> loginUser(@PathVariable String name) {
-        User user = userRepository.getUser(name);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return userRepository.findByName(name)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    // Fix later
     // add badge to user
-    @GetMapping("/user/{user}/add-badge/{badgeId}")
-    public ResponseEntity<User> addBadgeToUser(@PathVariable int userId, @RequestParam int badgeId) {
-        User user = userRepository.addBadgeToUser(userId, badgeId);
-        if (user != null) {
-            return ResponseEntity.ok(user);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/user/{userId}/add-badge/{badgeId}")
+    public ResponseEntity<User> addBadgeToUser(@PathVariable int userId, @PathVariable int badgeId) {
+        return userRepository.findById(userId)
+                .flatMap(user -> badgeRepository.findById(badgeId)
+                        .map(badge -> {
+                            user.addBadge(badge);
+                            return ResponseEntity.ok(userRepository.save(user));
+                        }))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     // get all badges
@@ -67,12 +64,9 @@ public class AppController {
 
     // get badge
     @GetMapping("/badge")
-    public ResponseEntity<List<Badge>> getBadge(@RequestParam int id) {
-        List<Badge> badges = badgeRepository.getBadge(id);
-        if (badges != null && !badges.isEmpty()) {
-            return ResponseEntity.ok(badges);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Badge> getBadge(@RequestParam int id) {
+        return badgeRepository.findById(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 }

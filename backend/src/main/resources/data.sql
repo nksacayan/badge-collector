@@ -1,3 +1,21 @@
-INSERT INTO badges (id, name, description) VALUES
-  (101, 'Veteran Collector', 'Awarded for collecting 100 unique items.'),
-  (102, 'Completionist', 'Earned for unlocking every badge in a set.');
+INSERT INTO badges (name, description) VALUES
+  ('Explorer', 'Unlocked for visiting 50 unique locations.'),
+  ('Speed Runner', 'Earned for completing a challenge in record time.'),
+  ('Master Crafter', 'Awarded for crafting 500 items.'),
+  ('Social Butterfly', 'Given for interacting with 100 different players.'),
+  ('Strategist', 'Earned for winning 10 matches using tactical skills.'),
+  ('Loyal Member', 'Awarded for logging in every day for a month.'),
+  ('Puzzle Solver', 'Unlocked for completing all logic puzzles.'),
+  ('Sharpshooter', 'Earned for achieving 90% accuracy in a shooting challenge.'),
+  ('Treasure Hunter', 'Awarded for finding all hidden collectibles.'),
+  ('Beast Tamer', 'Unlocked for taming 10 rare creatures.'),
+  ('Architect', 'Earned for building a structure with 1000 blocks.'),
+  ('Historian', 'Awarded for unlocking all lore entries.'),
+  ('Gladiator', 'Unlocked for winning 50 arena battles.'),
+  ('Altruist', 'Earned for helping 20 other players complete quests.'),
+  ('Collector Supreme', 'Awarded for collecting every item in the game.'),
+  ('Marathoner', 'Unlocked for traveling 100 miles in-game.'),
+  ('Silent Assassin', 'Earned for completing a stealth mission undetected.'),
+  ('Event Champion', 'Awarded for winning a seasonal event.'),
+  ('Bug Squisher', 'Unlocked for reporting 10 verified bugs.'),
+  ('Customizer', 'Earned for creating 10 unique character outfits.');
