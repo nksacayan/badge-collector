@@ -1,5 +1,7 @@
 import { useNavigate, useParams } from 'react-router';
 import './BadgeDetail.css';
+import badgePlaceholder from '../assets/Badge_Placeholder.png';
+
 
 const mockBadgeData = {
 	1: {
@@ -19,13 +21,9 @@ const BadgeDetail = () => {
 	return (
 		<div className="badge-detail-container">
 			{/* Is using navigate here why the scroll is saved? Neat */}
-			<button className="back-button" onClick={() => navigate(-1)}>Back</button>
-			<div>Earned status</div>
-
-			<div className={`badge-circle badge-${badge.color}`}>
-				❤️
-			</div>
-
+			<button className="back-button common-button" onClick={() => navigate(-1)}>Back</button>
+			<div className='common-button'>Earned status</div>
+			<img id="badge-placeholder-icon" src={badgePlaceholder} alt="Badge Icon" />
 			<h1 className="badge-name">{badge.name}</h1>
 			<p className="badge-description">{badge.description}</p>
 			{/* Keep navigate here since badges will be dynamic paths */}

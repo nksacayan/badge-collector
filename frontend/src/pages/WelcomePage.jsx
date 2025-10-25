@@ -53,7 +53,7 @@ const WelcomePage = () => {
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
-				<button onClick={handleSubmit}>
+				<button className="common-button" onClick={handleSubmit}>
 					&gt;
 				</button>
 			</div>

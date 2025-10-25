@@ -66,12 +66,6 @@
 .name-input-group button {
 	height: 100%;
 	font-size: 2rem;
-	border-radius: 50vmax;
-	/* always rounds to max possible */
-	background-color: #1A633C;
-	cursor: pointer;
-	border: none;
-	color: white;
 
 	/* give the button a share of the available space so it grows slightly
 	   and takes some width from the input (mobile-first) */
@@ -81,7 +75,8 @@
 }
 
 /* Desktop / larger screens: scale up typography and spacing */
-@media (min-width: 600px) {
+/* Drop all media queries for now and focus strictly on mobile */
+/* @media (min-width: 600px) {
 	.welcome-container {
 		width: 80vw;
 		gap: 5vh;
@@ -102,4 +97,4 @@
 		padding: 0 1rem;
 		min-width: 3.2rem;
 	}
-}
+} */

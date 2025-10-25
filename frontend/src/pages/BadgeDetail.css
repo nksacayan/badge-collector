@@ -1,61 +1,13 @@
 .badge-detail-container {
-	padding: 2rem;
-	max-width: 600px;
-	margin: 0 auto;
 	text-align: center;
+	display: flex;
+	flex-direction: column;
 }
 
 .back-button {
-	background-color: #66bb6a;
-	color: white;
-	border: none;
 	padding: 0.5rem 1rem;
 	font-size: 1rem;
-	border-radius: 8px;
-	cursor: pointer;
 	margin-bottom: 1rem;
-}
-
-.badge-circle {
-	width: 100px;
-	height: 100px;
-	border-radius: 50%;
-	font-size: 2rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	margin: 1.5rem auto;
-}
-
-/* Color variants */
-.badge-red {
-	background-color: #ef9a9a;
-	color: #b71c1c;
-}
-
-.badge-green {
-	background-color: #a5d6a7;
-	color: #1b5e20;
-}
-
-.badge-yellow {
-	background-color: #fff59d;
-	color: #fbc02d;
-}
-
-.badge-blue {
-	background-color: #90caf9;
-	color: #0d47a1;
-}
-
-.badge-brown {
-	background-color: #bcaaa4;
-	color: #4e342e;
-}
-
-.badge-pink {
-	background-color: #f8bbd0;
-	color: #ad1457;
 }
 
 .badge-name {

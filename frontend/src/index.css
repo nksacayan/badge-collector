@@ -19,6 +19,14 @@ body,
   padding: 0;
 }
 
+.common-button {
+  border-radius: 50vmax;
+  /* always rounds to max possible */
+  background-color: #1A633C;
+  border: none;
+  color: white;
+}
+
 @font-face {
   font-family: 'Strato';
   src: url('./assets/fonts/Strato/strato.medium-regular.ttf') format('truetype');
