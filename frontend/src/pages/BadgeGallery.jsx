@@ -55,7 +55,7 @@ const BadgeGallery = () => {
 
 			<div className="badge-grid">
 				{mockBadges.map(badge => (
-					<BadgeCard key={badge.id} badge={badge} isEarned={false} />
+					<BadgeCard key={badge.id} badge={badge} isEarned={badge.earned} />
 				))}
 			</div>
 		</div>
