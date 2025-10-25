@@ -20,11 +20,13 @@ To make wsl -> windows -> lan reachable u gotta route wsl to windows and then ma
 wsl hostname -I
 
 netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=<WSL_IP>
-netsh interface portproxy add v4tov4 listenport=5173 listenaddress=0.0.0.0 connectport=5173 connectaddress=<WSL_IP>
+netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=<WSL_IP>
 
 New-NetFirewallRule -DisplayName "WSL Spring Boot" -Direction Inbound -LocalPort 8080 -Protocol TCP -Action Allow
-New-NetFirewallRule -DisplayName "WSL React Dev" -Direction Inbound -LocalPort 5173 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "WSL React Dev" -Direction Inbound -LocalPort 3000 -Protocol TCP -Action Allow
 
 automate this later it doesnt persist between boots
 
 .env is on the repo flmao dont put anything bad in there
+
+you also have to change the env every startup since ip is dynamic

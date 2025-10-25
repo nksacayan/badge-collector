@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,15 +29,15 @@ public class AppController {
     }
 
     // create user
-    @GetMapping("/user/create/{name}")
-    public ResponseEntity<User> createUser(@PathVariable("name") String name) {
+    @PostMapping("/user/{name}")
+    public ResponseEntity<User> createUser(@PathVariable String name) {
         User user = userRepository.createUser(name);
         return ResponseEntity.ok(user);
     }
 
     // get user
     @GetMapping("/user/{name}")
-    public ResponseEntity<User> loginUser(@PathVariable("name") String name) {
+    public ResponseEntity<User> loginUser(@PathVariable String name) {
         User user = userRepository.getUser(name);
         if (user != null) {
             return ResponseEntity.ok(user);

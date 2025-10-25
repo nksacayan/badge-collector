@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from '../components/UserContext';
 import './WelcomePage.css';
 import logo from '../assets/Scout_Logo.png';
-import charmander from '../assets/tracing_charmander_square.JPG';
+import bdayCat from '../assets/cat.PNG';
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 const WelcomePage = () => {
@@ -14,7 +14,9 @@ const WelcomePage = () => {
 	const handleSubmit = async () => {
 		if (!name.trim()) return;
 		try {
-			const res = await fetch(`${apiUrl}/user?name=${encodeURIComponent(name)}`);
+			const res = await fetch(
+				`${apiUrl}/user/${encodeURIComponent(name)}`,
+				{ method: 'POST' });
 			if (res.ok) {
 				const user = await res.json();
 				if (user?.id) {
@@ -23,7 +25,7 @@ const WelcomePage = () => {
 					throw new Error('User not found');
 				}
 			} else {
-				const createRes = await fetch(`{apiUrl}/user/create?name=${encodeURIComponent(name)}`);
+				const createRes = await fetch(`{apiUrl}/user/${encodeURIComponent(name)}`);
 				if (createRes.ok) {
 					const newUser = await createRes.json();
 					setUser(newUser);
@@ -41,7 +43,7 @@ const WelcomePage = () => {
 		<div className="welcome-container">
 			<img id="title-logo" src={logo} alt="Logo" />
 
-			<img id="cat-icon" src={charmander} alt="Icon" />
+			<img id="cat-icon" src={bdayCat} alt="Icon" />
 
 			<div className="name-input-group">
 				<input
