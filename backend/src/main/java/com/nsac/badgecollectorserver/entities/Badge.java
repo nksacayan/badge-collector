@@ -1,4 +1,4 @@
-package com.nsac.badgecollectorserver;
+package com.nsac.badgecollectorserver.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

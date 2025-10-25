@@ -1,4 +1,4 @@
-package com.nsac.badgecollectorserver;
+package com.nsac.badgecollectorserver.configs;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;

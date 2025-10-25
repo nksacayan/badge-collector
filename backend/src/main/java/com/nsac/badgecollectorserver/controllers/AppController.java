@@ -1,4 +1,4 @@
-package com.nsac.badgecollectorserver;
+package com.nsac.badgecollectorserver.controllers;
 
 import java.util.List;
 
@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.nsac.badgecollectorserver.entities.Badge;
+import com.nsac.badgecollectorserver.entities.User;
+import com.nsac.badgecollectorserver.repositories.BadgeRepository;
+import com.nsac.badgecollectorserver.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/api")
