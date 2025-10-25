@@ -15,17 +15,15 @@ import com.nsac.badgecollectorserver.entities.User;
 import com.nsac.badgecollectorserver.repositories.BadgeRepository;
 import com.nsac.badgecollectorserver.repositories.UserRepository;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api")
 public class AppController {
 
     private final UserRepository userRepository;
     private final BadgeRepository badgeRepository;
-
-    public AppController(UserRepository userRepository, BadgeRepository badgeRepository) {
-        this.userRepository = userRepository;
-        this.badgeRepository = badgeRepository;
-    }
 
     @GetMapping("/users")
     public ResponseEntity<List<User>> users() {
