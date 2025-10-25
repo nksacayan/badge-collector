@@ -11,7 +11,7 @@ const BadgeCard = ({ badge }) => {
 	return (
 		// This will be a clickable icon down the road
 		<div
-			className={`badge-card ${badge.earned ? 'earned' : 'locked'}`}
+			className={`badge-card`}
 			onClick={handleClick}
 		>
 			<img id="badge-placeholder-icon" src={badgePlaceholder} alt="Badge Icon" />

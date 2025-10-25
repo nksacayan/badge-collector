@@ -22,14 +22,15 @@ const BadgeDetail = () => {
 		<div className="badge-detail-container">
 			{/* Is using navigate here why the scroll is saved? Neat */}
 			<button className="back-button common-button" onClick={() => navigate(-1)}>Back</button>
-			<div className='common-button'>Earned status</div>
+			<div className='common-button badge-status'>Earned status</div>
 			<img id="badge-placeholder-icon" src={badgePlaceholder} alt="Badge Icon" />
 			<h1 className="badge-name">{badge.name}</h1>
 			<p className="badge-description">{badge.description}</p>
 			{/* Keep navigate here since badges will be dynamic paths */}
-			<button className="previous-badge-button" onClick={() => navigate(-1)}>Previous</button>
-			<button className="next-badge-button" onClick={() => navigate(-1)}>Next</button>
-
+			<nav className='badge-nav-button-container'>
+				<button className="badge-nav-button" onClick={() => navigate(-1)}>&#60; Previous</button>
+				<button className="badge-nav-button" onClick={() => navigate(-1)}>Next &#62;</button>
+			</nav>
 		</div>
 	);
 };

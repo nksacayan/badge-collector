@@ -2,27 +2,50 @@
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+	gap: 1.5rem;
 }
 
 .back-button {
-	padding: 0.5rem 1rem;
 	font-size: 1rem;
-	margin-bottom: 1rem;
+	align-self: flex-start;
+}
+
+.badge-status {
+	font-size: 1rem;
+	border: 0.1rem solid #5E96A7;
+	background-color: transparent;
+	color: #5E96A7;
+}
+
+.earned {
+	background-color: #5E96A7;
+	color: white;
+	border: none;
+
 }
 
 .badge-name {
 	font-size: 2rem;
 	font-weight: bold;
-	margin-bottom: 1rem;
-	color: #5d4037;
+	color: #42120C;
+	font-family: 'Strato';
+	font-weight: 500;
 }
 
 .badge-description {
 	font-size: 1rem;
-	line-height: 1.5;
-	color: #4e342e;
-	text-align: left;
-	white-space: pre-wrap;
-	margin: 0 auto;
-	max-width: 500px;
+	color: #42120C;
+	font-family: 'DMSansStatic';
+	font-weight: 400;
+	font-style: normal;
+}
+
+.badge-nav-button-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.badge-nav-button {
+	border: none;
+	background-color: transparent;
 }
