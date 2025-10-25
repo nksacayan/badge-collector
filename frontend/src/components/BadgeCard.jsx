@@ -9,13 +9,9 @@ const BadgeCard = ({ badge }) => {
 	};
 
 	return (
-		// This will be a clickable icon down the road
-		<div
-			className={`badge-card`}
-			onClick={handleClick}
-		>
-			<img id="badge-placeholder-icon" src={badgePlaceholder} alt="Badge Icon" />
-
+		// Apparently this stupid div is necessary for img stretching in a grid leave it
+		<div className='icon-flex-wrapper'>
+			<img onClick={handleClick} src={badgePlaceholder} alt="Badge Icon" />
 		</div>
 	);
 };

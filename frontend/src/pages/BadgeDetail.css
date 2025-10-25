@@ -2,8 +2,9 @@
 	text-align: center;
 	display: flex;
 	flex-direction: column;
-	gap: 1.5rem;
-	margin: 2rem;
+	gap: 2rem;
+	margin: 3rem;
+	margin-top: 4rem;
 }
 
 .back-button {
@@ -12,17 +13,17 @@
 }
 
 .badge-status {
-	font-size: 1rem;
+	font-size: 1.25rem;
 	border: 0.1rem solid #5E96A7;
 	background-color: transparent;
 	color: #5E96A7;
+	align-self: center;
 }
 
 .earned {
 	background-color: #5E96A7;
 	color: white;
 	border: none;
-
 }
 
 .badge-name {
@@ -31,6 +32,7 @@
 	color: #42120C;
 	font-family: 'Strato';
 	font-weight: 500;
+	margin-bottom: -2rem;
 }
 
 .badge-description {
@@ -41,12 +43,24 @@
 	font-style: normal;
 }
 
-.badge-nav-button-container {
+.badge-nav-button-footer {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
+	width: 80%;
+	margin-top: auto;
+	margin-bottom: 4em;
+
 }
 
-.badge-nav-button {
+.badge-nav-button-footer>button {
+	flex: 0 0 auto;
 	border: none;
 	background-color: transparent;
+}
+
+#badge-placeholder-icon {
+	width: 55%;
+	align-self: center;
+	/* height: auto; */
 }
