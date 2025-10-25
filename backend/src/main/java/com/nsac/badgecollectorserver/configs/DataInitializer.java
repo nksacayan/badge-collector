@@ -50,6 +50,9 @@ public class DataInitializer {
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(description);
+        // Derive image filename from name (lowercase, spaces -> hyphens, remove non-alphanumeric/hyphen)
+        String sanitized = name.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9\\-]", "");
+        badge.setImageFilename(sanitized + ".png");
         return badge;
     }
 }

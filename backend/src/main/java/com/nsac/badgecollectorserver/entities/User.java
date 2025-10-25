@@ -1,6 +1,5 @@
 package com.nsac.badgecollectorserver.entities;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -38,7 +37,6 @@ public class User {
             .id(new UserBadgeId(this.getId(), badge.getId()))
             .user(this)
             .badge(badge)
-            .acquiredAt(LocalDateTime.now())
             .build();
         userBadges.add(userBadge);
     }

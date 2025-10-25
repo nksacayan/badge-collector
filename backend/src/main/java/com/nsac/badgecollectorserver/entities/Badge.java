@@ -29,6 +29,7 @@ public class Badge {
     private Integer id;
     private String name;
     private String description;
+    private String imageFilename;
 
     @OneToMany(mappedBy = "badge")
     @Builder.Default

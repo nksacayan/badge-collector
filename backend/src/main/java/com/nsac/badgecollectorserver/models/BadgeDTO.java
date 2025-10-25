@@ -15,6 +15,7 @@ public class BadgeDTO {
 	private Integer id;
 	private String name;
 	private String description;
+	private String imageFilename;
 
 	public static BadgeDTO fromEntity(Badge badge) {
 		if (badge == null) return null;
@@ -22,6 +23,7 @@ public class BadgeDTO {
 				.id(badge.getId())
 				.name(badge.getName())
 				.description(badge.getDescription())
+				.imageFilename(badge.getImageFilename())
 				.build();
 	}
 
@@ -30,6 +32,7 @@ public class BadgeDTO {
 				.id(this.id)
 				.name(this.name)
 				.description(this.description)
+				.imageFilename(this.imageFilename)
 				.build();
 	}
 }

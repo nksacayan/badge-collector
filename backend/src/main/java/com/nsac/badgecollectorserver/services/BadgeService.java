@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.nsac.badgecollectorserver.entities.Badge;
 import com.nsac.badgecollectorserver.models.BadgeDTO;
 import com.nsac.badgecollectorserver.repositories.BadgeRepository;
 
@@ -18,10 +17,6 @@ import lombok.RequiredArgsConstructor;
 public class BadgeService {
     private final BadgeRepository badgeRepository;
 
-    public BadgeDTO createBadge(BadgeDTO badgeDTO) {
-        Badge badge = badgeDTO.toEntity();
-        return BadgeDTO.fromEntity(badgeRepository.save(badge));
-    }
 
     public List<BadgeDTO> findBadgesByName(String name) {
         return badgeRepository.findByName(name).stream()

@@ -1,7 +1,5 @@
 package com.nsac.badgecollectorserver.entities;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
@@ -33,8 +31,4 @@ public class UserBadge {
     @MapsId("badgeId")
     private Badge badge;
 
-    private LocalDateTime acquiredAt;
-
-    @Builder.Default
-    private LocalDateTime updatedAt = LocalDateTime.now();
 }
