@@ -1,14 +1,18 @@
 /* Reset + baseline */
 html,
-body,
-#root {
+body {
+  height: 100%;
   margin: 0;
   padding: 0;
-  background-color: #F5E9DB;
+}
+
+#root {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: #F5E9DB;
 }
 
 *,
