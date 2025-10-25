@@ -31,7 +31,7 @@ public class AppController {
     // create user
     @PostMapping("/user/{name}")
     public ResponseEntity<User> createUser(@PathVariable String name) {
-        User user = new User(name);
+        User user = User.builder().name(name).build();
         return ResponseEntity.ok(userRepository.save(user));
     }
 
