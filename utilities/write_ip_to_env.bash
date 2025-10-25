@@ -1,40 +1,45 @@
 #!/usr/bin/env bash
-# Usage: ./replace-backend-ip.sh 192.168.1.100
-# Replaces the xxx.xxx.xxx.xxx placeholder in frontend/.env with the provided IP (creates a backup).
-
 set -euo pipefail
 
-ENV_FILE="../frontend/.env"
+# Usage: ./create-frontend-env.sh 192.168.1.50
+# Expects only IPv4 octets as the single argument.
+
+TARGET_DIR="../frontend"
+ENV_FILE="${TARGET_DIR}/.env"
+TMP_FILE="${ENV_FILE}.tmp"
 
 if [ "${#}" -ne 1 ]; then
-  echo "Usage: $0 <IPv4-address>"
+  echo "Usage: $0 <ipv4-address e.g. 192.168.1.50>" >&2
   exit 2
 fi
 
-IP="${1}"
+IP="$1"
 
-# Basic IPv4 validation
-if ! [[ "${IP}" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]]; then
-  echo "Error: '${IP}' is not a valid IPv4 address format"
+# Validate IPv4: four octets 0-255
+if ! [[ "${IP}" =~ ^([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})\.([0-9]{1,3})$ ]]; then
+  echo "Error: input is not in IPv4 dotted format" >&2
   exit 3
 fi
 
-# Ensure each octet is 0-255
+# Check each octet range
 IFS='.' read -r o1 o2 o3 o4 <<< "${IP}"
-for o in $o1 $o2 $o3 $o4; do
-  if (( o < 0 || o > 255 )); then
-    echo "Error: '${IP}' has an octet outside 0-255"
+for oct in "${o1}" "${o2}" "${o3}" "${o4}"; do
+  if [ "${oct#0}" != "${oct}" ] && [ "${oct}" != "0" ]; then
+    : # allow leading zeros but keep numeric check
+  fi
+  if [ "${oct}" -lt 0 ] 2>/dev/null || [ "${oct}" -gt 255 ] 2>/dev/null; then
+    echo "Error: each octet must be between 0 and 255" >&2
     exit 4
   fi
 done
 
-if [ ! -f "${ENV_FILE}" ]; then
-  echo "Error: ${ENV_FILE} not found"
-  exit 5
-fi
+VITE_BACKEND_API_URL="http://${IP}:8080/api"
 
-# Replace the placeholder IP segment (handles the exact line shape and any stray dots)
-# Matches VITE_BACKEND_API_URL=http://...:8080/api and replaces the host with the supplied IP
-sed -E -e "s|^(VITE_BACKEND_API_URL=https?://)[^:/]+(:8080/api.*)$|\1${IP}\2|" -i "${ENV_FILE}"
+mkdir -p "${TARGET_DIR}"
 
-echo "Updated ${ENV_FILE}"
+{
+  printf 'VITE_BACKEND_API_URL="%s"\n' "${VITE_BACKEND_API_URL}"
+} > "${TMP_FILE}"
+
+mv "${TMP_FILE}" "${ENV_FILE}"
+echo "Wrote ${ENV_FILE} with VITE_BACKEND_API_URL=${VITE_BACKEND_API_URL}"
