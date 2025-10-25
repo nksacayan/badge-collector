@@ -7,8 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BadgeRepository extends JpaRepository<Badge, Integer> {
-    // JpaRepository already provides findAll() and findById()
-    
-    // Custom method for finding by name
     List<Badge> findByName(String name);
 }
