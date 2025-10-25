@@ -22,7 +22,7 @@ const BadgeDetail = () => {
 		<div className="badge-detail-container">
 			{/* Is using navigate here why the scroll is saved? Neat */}
 			<button className="back-button common-button" onClick={() => navigate(-1)}>Back</button>
-			<div className='common-button badge-status'>Earned status</div>
+			<div className='common-button badge-status'>NOT EARNED</div>
 			<img id="badge-placeholder-icon" src={badgePlaceholder} alt="Badge Icon" />
 			<h1 className="badge-name">{badge.name}</h1>
 			<p className="badge-description">{badge.description}</p>

@@ -47,6 +47,7 @@ const WelcomePage = () => {
 
 			<div className="name-input-group">
 				<input
+					className='common-button'
 					id="name-input"
 					type="text"
 					placeholder="Name"
