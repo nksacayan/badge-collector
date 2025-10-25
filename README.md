@@ -33,3 +33,6 @@ automate this later it doesnt persist between boots
 .env is on the repo flmao dont put anything bad in there
 
 you also have to change the env every startup since ip is dynamic
+
+run write_ip sh
+copy the ps script to /mnt/ then run in windows elevated
