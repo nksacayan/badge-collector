@@ -1,18 +1,21 @@
 .gallery-container {
 	text-align: center;
-	padding: 2rem;
+	display: flex;
+	flex-direction: column;
+	margin: 2rem;
+	gap: 1rem;
 }
 
 .badge-welcome {
 	font-size: 1.5rem;
-	color: #388e3c;
-	margin: 0;
+	font-family: 'DMSansStatic', sans-serif;
+	font-weight: 900;
+	font-style: normal;
 }
 
 .badge-header {
 	font-size: 2rem;
 	font-weight: bold;
-	margin: 0.5rem 0 1.5rem;
 	color: #d32f2f;
 	font-family: 'Strato', sans-serif;
 	font-weight: 500;
@@ -22,19 +25,18 @@
 	background-color: #66bb6a;
 	color: white;
 	border: none;
-	padding: 0.5rem 1rem;
 	font-size: 1rem;
 	border-radius: 8px;
 	cursor: pointer;
 	text-decoration: none;
 	display: inline-block;
-	margin-bottom: 1rem;
 }
 
 .badge-instruction {
 	font-size: 0.9rem;
-	color: #757575;
-	margin-bottom: 1rem;
+	font-family: 'DMSansStatic', sans-serif;
+	font-weight: 400;
+	font-style: italic;
 }
 
 .badge-grid {

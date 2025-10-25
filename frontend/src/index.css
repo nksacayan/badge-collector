@@ -15,10 +15,28 @@ body,
 *::before,
 *::after {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 @font-face {
   font-family: 'Strato';
   src: url('./assets/fonts/Strato/strato.medium-regular.ttf') format('truetype');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DMSansStatic';
+  src: url('./assets/fonts/DM_Sans/static/DMSans-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DMSansStatic';
+  src: url('./assets/fonts/DM_Sans/static/DMSans_18pt-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
