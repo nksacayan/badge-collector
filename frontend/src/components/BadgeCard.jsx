@@ -2,7 +2,7 @@ import './BadgeCard.css';
 import { useNavigate } from 'react-router';
 import badgePlaceholder from '../assets/Badge_Placeholder.png';
 
-const BadgeCard = ({ badge }) => {
+const BadgeCard = ({ badge, isEarned }) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
 		navigate(`/badge/${badge.id}`);
@@ -11,7 +11,7 @@ const BadgeCard = ({ badge }) => {
 	return (
 		// Apparently this stupid div is necessary for img stretching in a grid leave it
 		<div className='icon-flex-wrapper'>
-			<img onClick={handleClick} src={badgePlaceholder} alt="Badge Icon" />
+			<img className={`${isEarned ? '' : 'faded'}`} onClick={handleClick} src={badgePlaceholder} alt="Badge Icon" />
 		</div>
 	);
 };

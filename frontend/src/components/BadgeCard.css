@@ -1,3 +1,7 @@
 .icon-flex-wrapper img {
 	width: 80%;
 }
+
+.faded {
+	opacity: 50%;
+}
