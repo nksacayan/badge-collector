@@ -9,11 +9,13 @@
 	margin: 0;
 }
 
-.badge-subtitle {
+.badge-header {
 	font-size: 2rem;
 	font-weight: bold;
 	margin: 0.5rem 0 1.5rem;
 	color: #d32f2f;
+	font-family: 'Strato', sans-serif;
+	font-weight: 500;
 }
 
 .leaderboard-button {

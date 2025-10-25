@@ -48,7 +48,7 @@ const BadgeGallery = () => {
 	return (
 		<div className="gallery-container">
 			<h2 className="badge-welcome">WELCOME, Nick</h2>
-			<h3 className="badge-subtitle">YOUR BADGES</h3>
+			<h3 className="badge-header">YOUR BADGES</h3>
 
 			{/* <Link to="/leaderboard" className="leaderboard-button">Leaderboard &gt;</Link> */}
 			<p className="badge-instruction">Click badge for details!</p>

@@ -1,5 +1,3 @@
-/* index.css */
-
 /* Reset + baseline */
 html,
 body,
@@ -17,4 +15,10 @@ body,
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Strato';
+  src: url('./assets/fonts/Strato/strato.medium-regular.ttf') format('truetype');
+  font-display: swap;
 }
