@@ -1,58 +1,10 @@
-.badge-card {
-	cursor: pointer;
-	text-align: center;
-	padding: 1rem;
-	border-radius: 8px;
-	transition: transform 0.2s;
-}
-
-.badge-card:hover {
-	transform: scale(1.05);
-}
-
-.badge-circle {
-	width: 80px;
-	height: 80px;
-	margin: 0 auto 0.5rem;
-	border-radius: 50%;
-	font-size: 2rem;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: white;
-}
-
-/* Color themes */
-.badge-red .badge-circle {
-	background-color: #ef9a9a;
-	color: #b71c1c;
-}
-
-.badge-green .badge-circle {
-	background-color: #a5d6a7;
-	color: #1b5e20;
-}
-
-.badge-yellow .badge-circle {
-	background-color: #fff59d;
-	color: #fbc02d;
-}
-
-.badge-blue .badge-circle {
-	background-color: #90caf9;
-	color: #0d47a1;
-}
-
-.badge-brown .badge-circle {
-	background-color: #bcaaa4;
-	color: #4e342e;
-}
-
-.badge-pink .badge-circle {
-	background-color: #f8bbd0;
-	color: #ad1457;
-}
-
 .locked .badge-circle {
 	opacity: 0.4;
+}
+
+#badge-placeholder-icon {
+	max-width: 100%;
+	max-height: 40vh;
+	height: auto;
+	object-fit: contain;
 }
