@@ -71,3 +71,18 @@ Pros:
 Cons:
 - Requires users to be logged in before scanning
 - If they scan from outside your app, it won’t work
+
+
+---
+
+🔧 Why JWT Wins for Your Use Case
+You're building a LAN-hosted party site with:
+- React frontend that needs to know who's logged in
+- NFC-triggered endpoints that must include user identity
+- No serious security concerns (so token storage in localStorage is fine)
+- A desire for modular, reusable patterns
+JWT is the ergonomic choice because:
+- You can embed user info directly in the token (sub, name, role, etc.).
+- React can decode the token without extra API calls.
+- NFC scans can hit endpoints with Authorization: Bearer <token> — no session context needed.
+- You avoid session store complexity and scale cleanly even if you expand later.
