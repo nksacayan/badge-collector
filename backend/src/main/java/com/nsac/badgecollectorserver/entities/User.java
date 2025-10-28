@@ -7,7 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,16 +30,24 @@ public class User {
     @EqualsAndHashCode.Include
     private Integer id;
     private String name;
-    @OneToMany(mappedBy = "user")
+
+    // Remember that user is the owning side and persist join entries through here
+    @ManyToMany
+    @JoinTable(
+        name = "user_badges",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "badge_id")
+    )
     @Builder.Default
-    private Set<UserBadge> userBadges = new HashSet<>();
+    private Set<Badge> badges = new HashSet<>();
 
     public void addBadge(Badge badge) {
-        UserBadge userBadge = UserBadge.builder()
-            .id(new UserBadgeId(this.getId(), badge.getId()))
-            .user(this)
-            .badge(badge)
-            .build();
-        userBadges.add(userBadge);
+        badges.add(badge);
+        badge.getUsers().add(this);
+    }
+
+    public void removeBadge(Badge badge) {
+        badges.remove(badge);
+        badge.getUsers().remove(this);
     }
 }

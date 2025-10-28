@@ -7,7 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +31,7 @@ public class Badge {
     private String description;
     private String imageFilename;
 
-    @OneToMany(mappedBy = "badge")
+    @ManyToMany(mappedBy = "badges")
     @Builder.Default
-    private Set<UserBadge> userBadges = new HashSet<>();
+    private Set<User> users = new HashSet<>();
 }

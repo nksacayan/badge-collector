@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.nsac.badgecollectorserver.entities.Badge;
+import com.nsac.badgecollectorserver.entities.User;
 import com.nsac.badgecollectorserver.repositories.BadgeRepository;
 import com.nsac.badgecollectorserver.repositories.UserRepository;
 

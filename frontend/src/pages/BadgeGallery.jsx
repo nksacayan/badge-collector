@@ -8,7 +8,7 @@ import { UserContext } from "../components/UserContext";
 
 const BadgeGallery = () => {
 	const context = useContext(UserContext);
-	const { user, setUser } = context;
+	const { user } = context;
 
 	return (
 		<div className="gallery-container">
