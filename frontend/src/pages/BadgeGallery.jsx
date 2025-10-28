@@ -1,7 +1,6 @@
 import { Link } from 'react-router';
 import BadgeCard from '../components/BadgeCard';
 import './BadgeGallery.css';
-import { mockBadges } from '../data/mockBadges';
 import { useContext } from "react";
 import { UserContext } from "../components/UserContext";
 
@@ -19,8 +18,8 @@ const BadgeGallery = () => {
 			<p className="badge-instruction">Click badge for details!</p>
 
 			<div className="badge-grid">
-				{mockBadges.map(mockBadge => (
-					<BadgeCard key={mockBadge.id} badge={mockBadge} />
+				{user?.badges.map(badge => (
+					<BadgeCard key={badge.id} badge={badge} />
 				))}
 			</div>
 		</div>
