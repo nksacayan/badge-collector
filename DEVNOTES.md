@@ -86,3 +86,29 @@ JWT is the ergonomic choice because:
 - React can decode the token without extra API calls.
 - NFC scans can hit endpoints with Authorization: Bearer <token> — no session context needed.
 - You avoid session store complexity and scale cleanly even if you expand later.
+
+🚀 How JWT Works in Your App
+- Login: User logs in via React frontend.
+- Token Issued: Spring Boot backend generates a JWT and sends it to the client.
+- Storage: Client stores the token (e.g., in memory or localStorage).
+- Authenticated Requests: Client includes the token in Authorization: Bearer <token> header.
+- Validation: Backend verifies the token signature and extracts user info.
+
+✅ Benefits for Your Use Case
+- Stateless: No need to store sessions server-side—great for LAN.
+- Fast: Token validation is quick and scalable.
+- Secure Identity Transfer: NFC-triggered requests can include the JWT to identify the user.
+- Portable: Can be passed via headers, cookies, or even URLs (Base64Url-encoded)
+
+⚠️ Things to Watch Out For
+- Token Expiry: Use short-lived tokens with exp claim.
+- Revocation: JWTs are hard to revoke unless you track them (e.g., with a blacklist).
+- Storage Risks: Avoid storing tokens in localStorage if XSS is a concern—consider httpOnly cookies.
+
+🛠️ Best Practices
+- Use Spring Security with a JWT filter to validate tokens.
+- In React, manage token lifecycle with a custom hook or context.
+- Consider refresh tokens for longer sessions.
+
+Want a validator-style JWT filter for Spring Boot or a React hook to manage tokens? I can sketch one out for you.
+Sources:
