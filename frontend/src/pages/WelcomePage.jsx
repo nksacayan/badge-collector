@@ -14,21 +14,17 @@ const WelcomePage = () => {
 	const handleSubmit = async () => {
 		if (!name.trim()) return;
 		try {
-			const res = await fetch(
-				`${apiUrl}/user/${encodeURIComponent(name)}`,
+			const loginResponse = await fetch(
+				`${apiUrl}/user/login/${encodeURIComponent(name)}`,
 				{ method: 'POST' });
-			if (res.ok) {
-				const user = await res.json();
-				if (user?.id) {
-					setUser(user);
-				} else {
-					throw new Error('User not found');
-				}
+			if (loginResponse.ok) {
+				await handleAuthResponse(loginResponse);
 			} else {
-				const createRes = await fetch(`{apiUrl}/user/${encodeURIComponent(name)}`);
-				if (createRes.ok) {
-					const newUser = await createRes.json();
-					setUser(newUser);
+				const registerResponse = await fetch(
+					`${apiUrl}/user/register/${encodeURIComponent(name)}`,
+					{ method: 'POST' });
+				if (registerResponse.ok) {
+					await handleAuthResponse(registerResponse);
 				} else {
 					throw new Error('Failed to create user');
 				}
@@ -38,6 +34,20 @@ const WelcomePage = () => {
 			alert('Error connecting to server.');
 		}
 	};
+
+	async function handleAuthResponse(authResponse) {
+		const authBody = await authResponse.json();
+
+		if (!authBody?.user) {
+			throw new Error('User not found');
+		}
+		setUser(authBody.user);
+
+		if (!authBody?.token) {
+			throw new Error('Token not found');
+		}
+		localStorage.setItem('badgeCollectorToken', authBody.token);
+	}
 
 	return (
 		<div className="welcome-container">
