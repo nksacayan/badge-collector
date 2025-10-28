@@ -11,7 +11,7 @@ const BadgeCard = ({ badge }) => {
 	return (
 		// Apparently this stupid div is necessary for img stretching in a grid leave it
 		<div className='icon-flex-wrapper'>
-			<img className={`${true} ? '' : 'faded'}`} onClick={handleClick} src={badgePlaceholder} alt="Badge Icon" />
+			<img className={`${badge.owned ? '' : 'faded'}`} onClick={handleClick} src={badgePlaceholder} alt="Badge Icon" />
 		</div>
 	);
 };
