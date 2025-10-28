@@ -112,3 +112,89 @@ JWT is the ergonomic choice because:
 
 Want a validator-style JWT filter for Spring Boot or a React hook to manage tokens? I can sketch one out for you.
 Sources:
+
+---
+
+To set up a frontend endpoint, you're essentially creating a **route in your frontend app** that responds to a specific URL—like the one encoded in your NFC tag. Here's how to architect it modularly in React (or any SPA framework):
+
+---
+
+### 🧱 Step-by-Step: Frontend Endpoint Setup (React Example)
+
+#### 1. **Define the Route**
+In your router config (e.g., using React Router):
+
+```tsx
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NfcEntryPage from './pages/NfcEntryPage';
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/nfc-entry" element={<NfcEntryPage />} />
+        {/* other routes */}
+      </Routes>
+    </Router>
+  );
+}
+```
+
+This makes `https://yourdomain.com/nfc-entry` a valid frontend endpoint.
+
+---
+
+#### 2. **Create the Page Component**
+This component handles the NFC-triggered logic:
+
+```tsx
+// pages/NfcEntryPage.tsx
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+export default function NfcEntryPage() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (!jwt) {
+      navigate('/login');
+      return;
+    }
+
+    fetch('/api/nfc-scan', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${jwt}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ scannedAt: Date.now() })
+    }).then(res => {
+      if (res.ok) navigate('/welcome');
+      else navigate('/error');
+    });
+  }, []);
+
+  return <div>Processing NFC scan…</div>;
+}
+```
+
+---
+
+#### 3. **Deploy Your Frontend**
+- Host it on a domain like `lanhub.gg`
+- Ensure your NFC tag points to `https://lanhub.gg/nfc-entry`
+
+---
+
+### 🧠 Validator Routine Summary
+
+| Step | Purpose | Example |
+|------|---------|---------|
+| Define route | Make URL valid | `/nfc-entry` |
+| Create page | Handle JWT + backend | `NfcEntryPage.tsx` |
+| Deploy | Make it reachable | `https://lanhub.gg/nfc-entry` |
+
+---
+
+Want to modularize this into a reusable pattern for other NFC flows like check-in, guest login, or device pairing? I can help you scaffold that next.
