@@ -1,5 +1,11 @@
 package com.nsac.badgecollectorserver.configs;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +20,7 @@ public class DataInitializer {
 
     @Bean
     CommandLineRunner initDatabase(BadgeRepository badgeRepository, UserRepository userRepository) {
-        return args -> {
+        return _ -> {
             // Only initialize if no badges exist
             if (badgeRepository.count() == 0) {
                 Badge[] badges = {
@@ -40,9 +46,32 @@ public class DataInitializer {
                     createBadge("Customizer", "Earned for creating 10 unique character outfits.")
                 };
                 
-                for (Badge badge : badges) {
-                    badgeRepository.save(badge);
-                }
+                badgeRepository.saveAll(Arrays.asList(badges));
+            }
+
+            List<Badge> retrievedBadges = badgeRepository.findAll();
+            Set<Badge> nicksBadges = new HashSet<>();
+            nicksBadges.add(retrievedBadges.get(0));
+            nicksBadges.add(retrievedBadges.get(1));
+            nicksBadges.add(retrievedBadges.get(2));
+            Set<Badge> angelasBadges = new HashSet<>();
+            angelasBadges.add(retrievedBadges.get(2));
+            angelasBadges.add(retrievedBadges.get(3));
+            angelasBadges.add(retrievedBadges.get(4));
+
+            if (userRepository.count() == 0) {
+                List<User> users = new ArrayList<>();
+                users.add(User.builder()
+                    .name("Test Nick")
+                    .badges(new HashSet<>(nicksBadges))
+                    .build()
+                );
+                users.add(User.builder()
+                    .name("Test Angela")
+                    .badges(new HashSet<>(angelasBadges))
+                    .build()
+                );
+                userRepository.saveAll(users);
             }
         };
     }
