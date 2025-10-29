@@ -42,7 +42,7 @@ const BadgeDetail = () => {
 				{/* Is using navigate here why the scroll is saved? Neat */}
 				<button className="back-button common-button" onClick={() => navigate(-1)}>Back</button>
 				{ownsBadge ? <p className='common-button badge-status earned'>EARNED</p> : <p className='common-button badge-status'>NOT EARNED</p>}
-				<img src={badgePlaceholder} alt="Badge Icon" />
+				<img src={`${apiUrl}/badges/images/${badge.imageFilename}`} alt={badge.name} loading="lazy" />
 				<h1 className="badge-name">{badge.name}</h1>
 				<p className="badge-description">{badge.description}</p>
 				{/* Keep navigate here since badges will be dynamic paths */}
