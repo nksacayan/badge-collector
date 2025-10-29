@@ -23,11 +23,14 @@ useEffect(() => {
 			// Create a Set of user badge IDs for fast lookup
 			const ownedBadgeIds = new Set(userBadges.map(b => b.id));
 
-			// Merge and annotate
-			const combinedBadges = result.map(badge => ({
-				...badge,
-				owned: ownedBadgeIds.has(badge.id),
-			}));
+			// Merge, annotate, and filter
+			const combinedBadges = result
+				.map(badge => ({
+					...badge,
+					owned: ownedBadgeIds.has(badge.id),
+				}))
+				.filter(badge => !badge.secret || badge.owned);
+
 
 			setBadges(combinedBadges);
 		} catch (err) {
