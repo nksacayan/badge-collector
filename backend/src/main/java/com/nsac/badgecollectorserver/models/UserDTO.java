@@ -1,6 +1,5 @@
 package com.nsac.badgecollectorserver.models;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,25 +18,33 @@ import lombok.NoArgsConstructor;
 public class UserDTO {
     private Integer id;
     private String name;
-    @Builder.Default
-    private Set<BadgeDTO> badges = new HashSet<>();
-    
-    public static UserDTO fromEntity(User user) {
-        Set<BadgeDTO> badgeDTOs = user.getBadges().stream()
-            .map(BadgeDTO::fromEntity)
-            .collect(Collectors.toSet());
+    private Set<BadgeDTO> badges;
 
+    // Full mapper: includes badges (shallow)
+    public static UserDTO fromEntity(User user) {
+        if (user == null) return null;
         return UserDTO.builder()
                 .id(user.getId())
                 .name(user.getName())
-                .badges(badgeDTOs)
+                .badges(user.getBadges().stream()
+                        .map(BadgeDTO::fromEntityShallow)
+                        .collect(Collectors.toSet()))
+                .build();
+    }
+
+    // Shallow mapper: excludes badges
+    public static UserDTO fromEntityShallow(User user) {
+        if (user == null) return null;
+        return UserDTO.builder()
+                .id(user.getId())
+                .name(user.getName())
                 .build();
     }
 
     public User toEntity() {
-        Set<Badge> badgeEntities = this.badges.stream()
-            .map(BadgeDTO::toEntity)
-            .collect(Collectors.toSet());
+        Set<Badge> badgeEntities = this.badges != null ? this.badges.stream()
+                .map(BadgeDTO::toEntity)
+                .collect(Collectors.toSet()) : null;
 
         return User.builder()
                 .id(this.id)
@@ -45,5 +52,4 @@ public class UserDTO {
                 .badges(badgeEntities)
                 .build();
     }
-
 }

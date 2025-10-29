@@ -11,7 +11,7 @@ function App() {
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/badges" element={<BadgeGallery />} />
-          <Route path="/badge/:id" element={<BadgeDetail />} />
+          <Route path="/badge/:badgeId" element={<BadgeDetail />} />
         </Routes>
       </BrowserRouter>
     </UserProvider>

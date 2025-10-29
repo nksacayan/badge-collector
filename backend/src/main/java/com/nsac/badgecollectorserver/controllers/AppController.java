@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nsac.badgecollectorserver.entities.User;
 import com.nsac.badgecollectorserver.exceptions.UserNotFoundException;
 import com.nsac.badgecollectorserver.models.AuthResponse;
 import com.nsac.badgecollectorserver.models.BadgeDTO;
@@ -79,10 +77,10 @@ public class AppController {
         return ResponseEntity.ok(badgeService.getAllBadges());
     }
 
-    @GetMapping("/badge")
-    public ResponseEntity<BadgeDTO> getBadge(@RequestParam int id) {
+    @GetMapping("/badge/{badgeId}")
+    public ResponseEntity<BadgeDTO> getBadge(@PathVariable int badgeId) {
         try {
-            return ResponseEntity.ok(badgeService.getBadgeById(id));
+            return ResponseEntity.ok(badgeService.getBadgeById(badgeId));
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
