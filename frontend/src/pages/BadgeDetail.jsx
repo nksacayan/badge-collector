@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from 'react-router';
 import './BadgeDetail.css';
 import badgePlaceholder from '../assets/Badge_Placeholder.png';
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../components/UserContext";
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 
@@ -10,6 +11,8 @@ const BadgeDetail = () => {
 	const [badge, setBadge] = useState([]);
 	const [ownsBadge, setOwnsBadge] = useState(false);
 	const { badgeId } = useParams();
+	const context = useContext(UserContext);
+	const { user } = context;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -23,7 +26,7 @@ const BadgeDetail = () => {
 				const badgeJson = await response.json();
 				setBadge(badgeJson);
 
-				const hasBadge = badgeJson.users?.some(user => user.id === Number(badgeId));
+				const hasBadge = badgeJson.users?.some(badgeUser => badgeUser.id === user.id);
 				hasBadge ? setOwnsBadge(true) : setOwnsBadge(false);
 			} catch (err) {
 				console.error("Error fetching badge:", err);
@@ -45,8 +48,14 @@ const BadgeDetail = () => {
 				{/* Keep navigate here since badges will be dynamic paths */}
 			</div>
 			<footer className='badge-nav-button-footer'>
-				<button className="badge-nav-button" onClick={() => navigate(-1)}>&#60; Previous</button>
-				<button className="badge-nav-button" onClick={() => navigate(-1)}>Next &#62;</button>
+				{ Number(badgeId) > 1 
+					&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${Number(badgeId) - 1}`)}>
+						&#60; Previous
+					</button> }
+				{ Number(badgeId) > 1 
+					&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${Number(badgeId) + 1}`)}>
+						Next &#62;
+					</button> }
 			</footer>
 		</>
 	);
