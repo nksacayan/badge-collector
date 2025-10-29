@@ -8,7 +8,6 @@ const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 const BadgeDetail = () => {
 	const navigate = useNavigate();
 	const [currentBadge, setCurrentBadge] = useState(null);
-	const [badges, setBadges] = useState([]);
 	const { badgeId } = useParams();
 	const context = useContext(UserContext);
 	const [previousId, setPreviousId] = useState(0);
@@ -36,8 +35,6 @@ const BadgeDetail = () => {
 					}))
 					.filter(badge => !badge.secret || badge.owned);
 	
-				setBadges(combinedBadges);
-
 				const currentBadgeVar = combinedBadges.find(badge => badge.id === Number(badgeId));
 				setCurrentBadge(currentBadgeVar);
 

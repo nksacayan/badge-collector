@@ -6,15 +6,15 @@ import { UserProvider } from './components/UserProvider';
 
 function App() {
   return (
-    <UserProvider>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserProvider>
         <Routes>
           <Route path="/" element={<WelcomePage />} />
           <Route path="/badges" element={<BadgeGallery />} />
           <Route path="/badge/:badgeId" element={<BadgeDetail />} />
         </Routes>
-      </BrowserRouter>
-    </UserProvider>
+      </UserProvider>
+    </BrowserRouter>
   );
 }
 
