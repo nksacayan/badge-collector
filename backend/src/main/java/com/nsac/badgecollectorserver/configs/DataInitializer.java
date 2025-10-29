@@ -54,6 +54,7 @@ public class DataInitializer {
             nicksBadges.add(retrievedBadges.get(0));
             nicksBadges.add(retrievedBadges.get(1));
             nicksBadges.add(retrievedBadges.get(2));
+            nicksBadges.add(retrievedBadges.get(19));
             Set<Badge> angelasBadges = new HashSet<>();
             angelasBadges.add(retrievedBadges.get(2));
             angelasBadges.add(retrievedBadges.get(3));

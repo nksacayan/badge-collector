@@ -16,7 +16,7 @@ useEffect(() => {
 		try {
 			const response = await fetch(`${apiUrl}/badges`);
 			if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-			const result = await response.json();
+			const allBadges = await response.json();
 
 			const userBadges = context.user.badges;
 
@@ -24,7 +24,7 @@ useEffect(() => {
 			const ownedBadgeIds = new Set(userBadges.map(b => b.id));
 
 			// Merge, annotate, and filter
-			const combinedBadges = result
+			const combinedBadges = allBadges
 				.map(badge => ({
 					...badge,
 					owned: ownedBadgeIds.has(badge.id),
