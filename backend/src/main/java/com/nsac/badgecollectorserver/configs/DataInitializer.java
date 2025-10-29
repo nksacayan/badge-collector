@@ -24,26 +24,26 @@ public class DataInitializer {
             // Only initialize if no badges exist
             if (badgeRepository.count() == 0) {
                 Badge[] badges = {
-                    createBadge("Explorer", "Unlocked for visiting 50 unique locations."),
-                    createBadge("Speed Runner", "Earned for completing a challenge in record time."),
-                    createBadge("Master Crafter", "Awarded for crafting 500 items."),
-                    createBadge("Social Butterfly", "Given for interacting with 100 different players."),
-                    createBadge("Strategist", "Earned for winning 10 matches using tactical skills."),
-                    createBadge("Loyal Member", "Awarded for logging in every day for a month."),
-                    createBadge("Puzzle Solver", "Unlocked for completing all logic puzzles."),
-                    createBadge("Sharpshooter", "Earned for achieving 90% accuracy in a shooting challenge."),
-                    createBadge("Treasure Hunter", "Awarded for finding all hidden collectibles."),
-                    createBadge("Beast Tamer", "Unlocked for taming 10 rare creatures."),
-                    createBadge("Architect", "Earned for building a structure with 1000 blocks."),
-                    createBadge("Historian", "Awarded for unlocking all lore entries."),
-                    createBadge("Gladiator", "Unlocked for winning 50 arena battles."),
-                    createBadge("Altruist", "Earned for helping 20 other players complete quests."),
-                    createBadge("Collector Supreme", "Awarded for collecting every item in the game."),
-                    createBadge("Marathoner", "Unlocked for traveling 100 miles in-game."),
-                    createBadge("Silent Assassin", "Earned for completing a stealth mission undetected."),
-                    createBadge("Event Champion", "Awarded for winning a seasonal event."),
-                    createBadge("Bug Squisher", "Unlocked for reporting 10 verified bugs."),
-                    createBadge("Customizer", "Earned for creating 10 unique character outfits.")
+                    createBadge("Explorer", "Unlocked for visiting 50 unique locations.", false),
+                    createBadge("Speed Runner", "Earned for completing a challenge in record time.", false),
+                    createBadge("Master Crafter", "Awarded for crafting 500 items.", false),
+                    createBadge("Social Butterfly", "Given for interacting with 100 different players.", false),
+                    createBadge("Strategist", "Earned for winning 10 matches using tactical skills.", false),
+                    createBadge("Loyal Member", "Awarded for logging in every day for a month.", false),
+                    createBadge("Puzzle Solver", "Unlocked for completing all logic puzzles.", false),
+                    createBadge("Sharpshooter", "Earned for achieving 90% accuracy in a shooting challenge.", false),
+                    createBadge("Treasure Hunter", "Awarded for finding all hidden collectibles.", false),
+                    createBadge("Beast Tamer", "Unlocked for taming 10 rare creatures.", false),
+                    createBadge("Architect", "Earned for building a structure with 1000 blocks.", false),
+                    createBadge("Historian", "Awarded for unlocking all lore entries.", false),
+                    createBadge("Gladiator", "Unlocked for winning 50 arena battles.", false),
+                    createBadge("Altruist", "Earned for helping 20 other players complete quests.", false),
+                    createBadge("Collector Supreme", "Awarded for collecting every item in the game.", false),
+                    createBadge("Marathoner", "Unlocked for traveling 100 miles in-game.", false),
+                    createBadge("Silent Assassin", "Earned for completing a stealth mission undetected.", true),
+                    createBadge("Event Champion", "Awarded for winning a seasonal event.", true),
+                    createBadge("Bug Squisher", "Unlocked for reporting 10 verified bugs.", true),
+                    createBadge("Customizer", "Earned for creating 10 unique character outfits.", true)
                 };
                 
                 badgeRepository.saveAll(Arrays.asList(badges));
@@ -76,13 +76,14 @@ public class DataInitializer {
         };
     }
 
-    private Badge createBadge(String name, String description) {
+    private Badge createBadge(String name, String description, boolean isSecret) {
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(description);
         // Derive image filename from name (lowercase, spaces -> hyphens, remove non-alphanumeric/hyphen)
         String sanitized = name.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9\\-]", "");
         badge.setImageFilename(sanitized + ".png");
+        badge.setSecret(isSecret);
         return badge;
     }
 }

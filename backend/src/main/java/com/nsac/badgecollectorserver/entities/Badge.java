@@ -30,6 +30,7 @@ public class Badge {
     private String name;
     private String description;
     private String imageFilename;
+    private boolean secret;
 
     @ManyToMany(mappedBy = "badges")
     @Builder.Default

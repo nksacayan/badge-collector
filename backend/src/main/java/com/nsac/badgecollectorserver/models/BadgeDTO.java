@@ -18,6 +18,7 @@ public class BadgeDTO {
     private String name;
     private String description;
     private String imageFilename;
+    private boolean secret;
     private Set<UserDTO> users;
 
     // Full mapper: includes users (shallow)
@@ -28,6 +29,7 @@ public class BadgeDTO {
                 .name(badge.getName())
                 .description(badge.getDescription())
                 .imageFilename(badge.getImageFilename())
+                .secret(badge.isSecret())
                 .users(badge.getUsers().stream()
                         .map(UserDTO::fromEntityShallow)
                         .collect(Collectors.toSet()))
@@ -42,6 +44,7 @@ public class BadgeDTO {
                 .name(badge.getName())
                 .description(badge.getDescription())
                 .imageFilename(badge.getImageFilename())
+                .secret(badge.isSecret())
                 .build();
     }
 
@@ -51,6 +54,7 @@ public class BadgeDTO {
                 .name(this.name)
                 .description(this.description)
                 .imageFilename(this.imageFilename)
+                .secret(this.secret)
                 .build();
     }
 }
