@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from 'react-router';
 import './BadgeDetail.css';
-import badgePlaceholder from '../assets/Badge_Placeholder.png';
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../components/UserContext";
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
@@ -8,11 +7,12 @@ const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 const BadgeDetail = () => {
 	const navigate = useNavigate();
-	const [badge, setBadge] = useState([]);
-	const [ownsBadge, setOwnsBadge] = useState(false);
+	const [currentBadge, setCurrentBadge] = useState(null);
+	const [badges, setBadges] = useState([]);
 	const { badgeId } = useParams();
 	const context = useContext(UserContext);
-	const { user } = context;
+	const [previousId, setPreviousId] = useState(0);
+	const [nextId, setNextId] = useState(0);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -20,45 +20,66 @@ const BadgeDetail = () => {
 			// Do more error handling here later
 
 			try {
-				const response = await fetch(`${apiUrl}/badge/${encodeURIComponent(badgeId)}`);
-				if (!response.ok) throw new Error("Failed to fetch badge");
+				const response = await fetch(`${apiUrl}/badges`);
+				if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+				const allBadges = await response.json();
+				const userBadges = context.user.badges;
+	
+				// Create a Set of user badge IDs for fast lookup
+				const ownedBadgeIds = new Set(userBadges.map(b => b.id));
+	
+				// Merge, annotate, and filter
+				const combinedBadges = allBadges
+					.map(badge => ({
+						...badge,
+						owned: ownedBadgeIds.has(badge.id),
+					}))
+					.filter(badge => !badge.secret || badge.owned);
+	
+				setBadges(combinedBadges);
 
-				const badgeJson = await response.json();
-				setBadge(badgeJson);
+				const currentBadgeVar = combinedBadges.find(badge => badge.id === Number(badgeId));
+				setCurrentBadge(currentBadgeVar);
 
-				const hasBadge = badgeJson.users?.some(badgeUser => badgeUser.id === user.id);
-				hasBadge ? setOwnsBadge(true) : setOwnsBadge(false);
+				const currentIndex = combinedBadges.findIndex(item => item.id === currentBadgeVar.id);
+				setPreviousId(currentBadgeVar.id > 1 ? combinedBadges[currentIndex - 1].id : 0);
+				setNextId(currentBadgeVar.id < combinedBadges.length ? combinedBadges[currentIndex + 1].id : 0);
 			} catch (err) {
-				console.error("Error fetching badge:", err);
+				console.error('Failed to fetch badges:', err);
 			}
 		};
-
+	
 		fetchData();
 	}, [badgeId]);
 
-	return (
-		<>
-			<div className="badge-detail-container">
-				{/* Is using navigate here why the scroll is saved? Neat */}
-				<button className="back-button common-button" onClick={() => navigate(-1)}>Back</button>
-				{ownsBadge ? <p className='common-button badge-status earned'>EARNED</p> : <p className='common-button badge-status'>NOT EARNED</p>}
-				<img src={`${apiUrl}/badges/images/${badge.imageFilename}`} alt={badge.name} loading="lazy" />
-				<h1 className="badge-name">{badge.name}</h1>
-				<p className="badge-description">{badge.description}</p>
-				{/* Keep navigate here since badges will be dynamic paths */}
-			</div>
-			<footer className='badge-nav-button-footer'>
-				{ Number(badgeId) > 1 
-					&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${Number(badgeId) - 1}`)}>
-						&#60; Previous
-					</button> }
-				{ Number(badgeId) > 1 
-					&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${Number(badgeId) + 1}`)}>
-						Next &#62;
-					</button> }
-			</footer>
-		</>
-	);
+	if (currentBadge)
+		return (
+			<>
+				<div className="badge-detail-container">
+					{/* Is using navigate here why the scroll is saved? Neat */}
+					<button className="back-button common-button" onClick={() => navigate('/badges')}>Back</button>
+					{currentBadge.owned ? <p className='common-button badge-status earned'>EARNED</p> : <p className='common-button badge-status'>NOT EARNED</p>}
+					<img src={`${apiUrl}/badges/images/${currentBadge.imageFilename}`} alt={currentBadge.name} loading="lazy" />
+					<h1 className="badge-name">{currentBadge.name}</h1>
+					<p className="badge-description">{currentBadge.description}</p>
+					{/* Keep navigate here since badges will be dynamic paths */}
+				</div>
+				<footer className='badge-nav-button-footer'>
+					{ previousId !== 0 
+						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${previousId}`)}>
+							&#60; Previous
+						</button> }
+					{ nextId !== 0 
+						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${nextId}`)}>
+							Next &#62;
+						</button> }
+				</footer>
+			</>
+		);
+	else
+		return (
+			<p>Loading I hope...</p>
+		);
 };
 
 export default BadgeDetail;
