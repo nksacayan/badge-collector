@@ -8,38 +8,42 @@ const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 const BadgeGallery = () => {
 	const context = useContext(UserContext);
-	const { user } = context;
+	const { user, setUser } = context;
 	const [badges, setBadges] = useState([]);
+	const [currentUser, setCurrentUser] = useState(null);
 
-useEffect(() => {
-	const fetchData = async () => {
-		try {
-			const response = await fetch(`${apiUrl}/badges`);
-			if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-			const allBadges = await response.json();
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const allBadgeResponse = await fetch(`${apiUrl}/badges`);
+				if (!allBadgeResponse.ok) throw new Error(`HTTP error! status: ${allBadgeResponse.status}`);
+				const allBadges = await allBadgeResponse.json();
 
-			const userBadges = context.user.badges;
+				const userResponse = await fetch(`${apiUrl}/user/${user.name}`);
+				if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
+				const userJson = await userResponse.json();
+				setUser(userJson);
 
-			// Create a Set of user badge IDs for fast lookup
-			const ownedBadgeIds = new Set(userBadges.map(b => b.id));
+				// Create a Set of user badge IDs for fast lookup
+				const ownedBadgeIds = new Set(userJson.badges.map(b => b.id));
 
-			// Merge, annotate, and filter
-			const combinedBadges = allBadges
-				.map(badge => ({
-					...badge,
-					owned: ownedBadgeIds.has(badge.id),
-				}))
-				.filter(badge => !badge.secret || badge.owned);
+				// Merge, annotate, and filter
+				const combinedBadges = allBadges
+					.map(badge => ({
+						...badge,
+						owned: ownedBadgeIds.has(badge.id),
+					}))
+					.filter(badge => !badge.secret || badge.owned);
 
 
-			setBadges(combinedBadges);
-		} catch (err) {
-			console.error('Failed to fetch badges:', err);
-		}
-	};
+				setBadges(combinedBadges);
+			} catch (err) {
+				console.error('Failed to fetch badges:', err);
+			}
+		};
 
-	fetchData();
-}, []);
+		fetchData();
+	}, []);
 
 	return (
 		<div className="gallery-container">
