@@ -1,14 +1,13 @@
 import { useNavigate, useParams } from 'react-router';
 import './BadgeDetail.css';
 import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../components/UserContext";
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 const NfcScan = () => {
 	const { badgeId } = useParams();
-	// I don't think context works since nfc manually navigates to url but try it out
-	const context = useContext(UserContext);
 	const [badge, setBadge] = useState(null);
+	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -21,7 +20,7 @@ const NfcScan = () => {
 					},
 					body: jwt
 				});
-			if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+			if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
 			const user = await res.json();
 			const newBadge = user.badges.find(badge => badge.id === Number(badgeId));
 			setBadge(newBadge);
@@ -30,7 +29,7 @@ const NfcScan = () => {
 	}, [badgeId]);
 
 	if (badge) {
-		return <h2>Scanned nfc for {badge.name}</h2>
+		navigate(`/badge/${badgeId}`)
 	}
 	else {
 		return <h2>Scanning...</h2>
