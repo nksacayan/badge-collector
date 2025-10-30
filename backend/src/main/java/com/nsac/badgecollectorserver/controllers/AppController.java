@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,6 +19,7 @@ import com.nsac.badgecollectorserver.services.JWTService;
 import com.nsac.badgecollectorserver.services.UserService;
 
 import lombok.RequiredArgsConstructor;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -45,7 +47,7 @@ public class AppController {
     @PostMapping("/user/register/{name}")
     public ResponseEntity<AuthResponse> registerUser(@PathVariable String name) {
         UserDTO userDTO = userService.createUser(name);
-        String jwt = jwtService.generateToken(userDTO);
+        String jwt = jwtService.generateTokenWithUserId(userDTO);
         AuthResponse authResponse = new AuthResponse(userDTO, jwt);
         return ResponseEntity.ok(authResponse);
     }
@@ -54,7 +56,7 @@ public class AppController {
     public ResponseEntity<AuthResponse> loginUser(@PathVariable String name) {
         try {
             UserDTO userDTO = userService.findUserByName(name);
-            String jwt = jwtService.generateToken(userDTO);
+            String jwt = jwtService.generateTokenWithUserId(userDTO);
             AuthResponse authResponse = new AuthResponse(userDTO, jwt);
             return ResponseEntity.ok(authResponse);
         } catch (UserNotFoundException e) {
@@ -63,7 +65,7 @@ public class AppController {
 
     }
 
-    @GetMapping("/user/{userId}/add-badge/{badgeId}")
+    @PostMapping("/user/{userId}/add-badge/{badgeId}")
     public ResponseEntity<UserDTO> addBadgeToUser(@PathVariable int userId, @PathVariable int badgeId) {
         try {
             return ResponseEntity.ok(userService.addBadgeToUser(userId, badgeId));
@@ -71,6 +73,13 @@ public class AppController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PostMapping("nfc/add-badge/{badgeId}")
+    public ResponseEntity<UserDTO> addBadgeToUserWithJwt(@PathVariable int badgeId, @RequestBody String jwt) {
+        int userId = Integer.parseInt(jwtService.extractTokenSubject(jwt));
+        return addBadgeToUser(userId, badgeId);
+    }
+    
 
     @GetMapping("/badges")
     public ResponseEntity<List<BadgeDTO>> getAllBadges() {
@@ -84,5 +93,10 @@ public class AppController {
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> getPing() {
+        return ResponseEntity.ok("Pong");
     }
 }

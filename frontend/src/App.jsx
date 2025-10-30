@@ -3,6 +3,7 @@ import WelcomePage from './pages/WelcomePage';
 import BadgeDetail from './pages/BadgeDetail';
 import { BrowserRouter, Routes, Route } from "react-router";
 import { UserProvider } from './components/UserProvider';
+import NfcScan from './pages/NfcScan';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<WelcomePage />} />
           <Route path="/badges" element={<BadgeGallery />} />
           <Route path="/badge/:badgeId" element={<BadgeDetail />} />
+          <Route path="/nfc/:badgeId" element={<NfcScan />} />
         </Routes>
       </UserProvider>
     </BrowserRouter>
