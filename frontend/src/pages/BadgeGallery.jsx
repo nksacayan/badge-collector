@@ -10,7 +10,6 @@ const BadgeGallery = () => {
 	const context = useContext(UserContext);
 	const { user, setUser } = context;
 	const [badges, setBadges] = useState([]);
-	const [currentUser, setCurrentUser] = useState(null);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -34,7 +33,6 @@ const BadgeGallery = () => {
 						owned: ownedBadgeIds.has(badge.id),
 					}))
 					.filter(badge => !badge.secret || badge.owned);
-
 
 				setBadges(combinedBadges);
 			} catch (err) {

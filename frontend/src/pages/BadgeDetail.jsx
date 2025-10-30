@@ -10,6 +10,7 @@ const BadgeDetail = () => {
 	const [currentBadge, setCurrentBadge] = useState(null);
 	const { badgeId } = useParams();
 	const context = useContext(UserContext);
+	const { user, setUser } = context;
 	const [previousId, setPreviousId] = useState(0);
 	const [nextId, setNextId] = useState(0);
 
@@ -22,11 +23,15 @@ const BadgeDetail = () => {
 				const response = await fetch(`${apiUrl}/badges`);
 				if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 				const allBadges = await response.json();
-				const userBadges = context.user.badges;
-	
+
+				const userResponse = await fetch(`${apiUrl}/user/${user.name}`);
+				if (!userResponse.ok) throw new Error(`HTTP error! status: ${userResponse.status}`);
+				const userJson = await userResponse.json();
+				setUser(userJson);
+
 				// Create a Set of user badge IDs for fast lookup
-				const ownedBadgeIds = new Set(userBadges.map(b => b.id));
-	
+				const ownedBadgeIds = new Set(userJson.badges.map(b => b.id));
+
 				// Merge, annotate, and filter
 				const combinedBadges = allBadges
 					.map(badge => ({
@@ -34,7 +39,7 @@ const BadgeDetail = () => {
 						owned: ownedBadgeIds.has(badge.id),
 					}))
 					.filter(badge => !badge.secret || badge.owned);
-	
+
 				const currentBadgeVar = combinedBadges.find(badge => badge.id === Number(badgeId));
 				setCurrentBadge(currentBadgeVar);
 
@@ -45,7 +50,7 @@ const BadgeDetail = () => {
 				console.error('Failed to fetch badges:', err);
 			}
 		};
-	
+
 		fetchData();
 	}, [badgeId]);
 
@@ -62,14 +67,14 @@ const BadgeDetail = () => {
 					{/* Keep navigate here since badges will be dynamic paths */}
 				</div>
 				<footer className='badge-nav-button-footer'>
-					{ previousId !== 0 
+					{previousId !== 0
 						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${previousId}`)}>
 							&#60; Previous
-						</button> }
-					{ nextId !== 0 
+						</button>}
+					{nextId !== 0
 						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${nextId}`)}>
 							Next &#62;
-						</button> }
+						</button>}
 				</footer>
 			</>
 		);
