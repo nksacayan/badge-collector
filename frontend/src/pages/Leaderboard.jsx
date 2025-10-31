@@ -1,4 +1,3 @@
-import { Link } from 'react-router';
 import './Leaderboard.css';
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../components/UserContext";
@@ -31,11 +30,11 @@ const Leaderboard = () => {
 			</thead>
 				<tbody>
 					<tr>
-						<td>Alice</td>
+						<td>1. Alice</td>
 						<td>30</td>
 					</tr>
 					<tr>
-						<td>Bob</td>
+						<td>2. Bob</td>
 						<td>25</td>
 					</tr>
 				</tbody>
