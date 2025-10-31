@@ -1,0 +1,8 @@
+.leaderboard-container {
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	margin: 3rem;
+	margin-top: 4rem;
+}

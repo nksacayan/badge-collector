@@ -22,6 +22,7 @@ wsl hostname -I
 
 netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=<WSL_IP>
 netsh interface portproxy add v4tov4 listenport=3000 listenaddress=0.0.0.0 connectport=3000 connectaddress=<WSL_IP>
+netsh interface portproxy show all
 
 skip firewalling i think i've done in manually but have an automated check
 New-NetFirewallRule -DisplayName "WSL Spring Boot" -Direction Inbound -LocalPort 8080 -Protocol TCP -Action Allow

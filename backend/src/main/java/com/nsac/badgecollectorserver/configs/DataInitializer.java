@@ -24,10 +24,10 @@ public class DataInitializer {
             // Only initialize if no badges exist
             if (badgeRepository.count() == 0) {
                 Badge[] badges = {
-                    createBadge("Explorer", "Unlocked for visiting 50 unique locations.", false, "check.png"),
-                    createBadge("Speed Runner", "Earned for completing a challenge in record time.", false, "medal.png"),
-                    createBadge("Master Crafter", "Awarded for crafting 500 items.", false, "star-medal.png"),
-                    createBadge("Social Butterfly", "Given for interacting with 100 different players.", false, "Badge_Placeholder.png"),
+                    createBadge("Explorer", "Unlocked for visiting 50 unique locations.", false, "BRACELET.png"),
+                    createBadge("Speed Runner", "Earned for completing a challenge in record time.", false, "CONNECTIONS.png"),
+                    createBadge("Master Crafter", "Awarded for crafting 500 items.", false, "CROSSWORD.png"),
+                    createBadge("Social Butterfly", "Given for interacting with 100 different players.", false, "DRINK.png"),
                     createBadge("Strategist", "Earned for winning 10 matches using tactical skills.", false, "Badge_Placeholder.png"),
                     createBadge("Loyal Member", "Awarded for logging in every day for a month.", false, "Badge_Placeholder.png"),
                     createBadge("Puzzle Solver", "Unlocked for completing all logic puzzles.", false, "Badge_Placeholder.png"),
@@ -43,7 +43,7 @@ public class DataInitializer {
                     createBadge("Silent Assassin", "Earned for completing a stealth mission undetected.", true, "Badge_Placeholder.png"),
                     createBadge("Event Champion", "Awarded for winning a seasonal event.", true, "Badge_Placeholder.png"),
                     createBadge("Bug Squisher", "Unlocked for reporting 10 verified bugs.", true, "Badge_Placeholder.png"),
-                    createBadge("Customizer", "Earned for creating 10 unique character outfits.", true, "verify.png")
+                    createBadge("Customizer", "Earned for creating 10 unique character outfits.", true, "Badge_Placeholder.png")
                 };
                 
                 badgeRepository.saveAll(Arrays.asList(badges));

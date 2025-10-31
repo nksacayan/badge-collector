@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { UserContext } from '../components/UserContext';
 import './WelcomePage.css';
 import logo from '../assets/Scout_Logo.png';
-import bdayCat from '../assets/cat.PNG';
+import bdayCat from '../assets/kitty.png';
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 const WelcomePage = () => {
