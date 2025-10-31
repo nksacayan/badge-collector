@@ -1,17 +1,17 @@
 import './Leaderboard.css';
-import { useContext, useEffect, useState } from "react";
-import { UserContext } from "../components/UserContext";
+import { useEffect, useState } from "react";
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 
 const Leaderboard = () => {
-	const context = useContext(UserContext);
-	const { user } = context;
-	const [badges, setBadges] = useState([]);
+	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-
+			const allUsersResponse = await fetch(`${apiUrl}/users`);
+			if (!allUsersResponse.ok) throw new Error(`HTTP error! status: ${allUsersResponse.status}`);
+			const allUsers = await allUsersResponse.json();
+			setUsers(allUsers);
 		};
 
 		fetchData();
@@ -29,15 +29,15 @@ const Leaderboard = () => {
 				</tr>
 			</thead>
 				<tbody>
-					<tr>
-						<td>1. Alice</td>
-						<td>30</td>
-					</tr>
-					<tr>
-						<td>2. Bob</td>
-						<td>25</td>
-					</tr>
-				</tbody>
+					{users
+						.sort((a, b) => b.badges.length - a.badges.length)
+						.map((user, index) => (
+						<tr key={user.id || index}>
+							<td>{index + 1}. {user.name}</td>
+							<td>{user.badges.length}</td>
+						</tr>
+						))}
+					</tbody>
 			</table>
 		</div>
 	);
