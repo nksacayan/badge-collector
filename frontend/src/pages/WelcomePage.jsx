@@ -12,7 +12,11 @@ const WelcomePage = () => {
 	const { setUser } = useContext(UserContext);
 
 	const handleSubmit = async () => {
-		if (!name.trim()) return;
+		const trimmedName = name.trim();
+		if (!isValidName(trimmedName)) {
+			alert('Please enter a valid name (1–14 characters, letters/numbers/underscores/space only).');
+			return;
+		}
 		try {
 			const loginResponse = await fetch(
 				`${apiUrl}/user/login/${encodeURIComponent(name)}`,
@@ -71,5 +75,18 @@ const WelcomePage = () => {
 		</div>
 	);
 };
+
+function isValidName(name) {
+	const trimmed = name.trim();
+	const minLength = 1;
+	const maxLength = 14;
+	const validPattern = /^[a-zA-Z0-9_ ]+$/; // Alphanumeric + underscore + space
+
+	return (
+		trimmed.length >= minLength &&
+		trimmed.length <= maxLength &&
+		validPattern.test(trimmed)
+	);
+}
 
 export default WelcomePage;
