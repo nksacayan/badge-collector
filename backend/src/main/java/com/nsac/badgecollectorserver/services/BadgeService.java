@@ -1,11 +1,14 @@
 package com.nsac.badgecollectorserver.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.nsac.badgecollectorserver.entities.Badge;
+import com.nsac.badgecollectorserver.exceptions.BadgeNotFoundException;
 import com.nsac.badgecollectorserver.models.BadgeDTO;
 import com.nsac.badgecollectorserver.repositories.BadgeRepository;
 
@@ -38,5 +41,12 @@ public class BadgeService {
 
     public void deleteBadge(Integer id) {
         badgeRepository.deleteById(id);
+    }
+
+    public boolean doesBadgeIdMatchNfcId(Integer badgeId, String nfcId) {
+        Optional<Badge> badgeOptional = badgeRepository.findById(badgeId);
+        if (badgeOptional.isEmpty()) throw new BadgeNotFoundException();
+        Badge badge = badgeOptional.get();
+        return nfcId.equalsIgnoreCase(badge.getNfcTagId());
     }
 }

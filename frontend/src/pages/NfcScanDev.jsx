@@ -3,8 +3,8 @@ import './BadgeDetail.css';
 import { useEffect, useState } from "react";
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
-const NfcScan = () => {
-	const { badgeId, nfcId } = useParams();
+const NfcScanDev = () => {
+	const { badgeId } = useParams();
 	const [badge, setBadge] = useState(null);
 	const navigate = useNavigate();
 
@@ -12,7 +12,7 @@ const NfcScan = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const jwt = localStorage.getItem('badgeCollectorToken');
-			const res = await fetch(`${apiUrl}/nfc/add-badge/${encodeURIComponent(badgeId)}/nfc-id/${encodeURIComponent(nfcId)}`,
+			const res = await fetch(`${apiUrl}/nfc/add-badge/${encodeURIComponent(badgeId)}`,
 				{
 					method: 'POST',
 					headers: {
@@ -36,4 +36,4 @@ const NfcScan = () => {
 	}
 };
 
-export default NfcScan;
+export default NfcScanDev;

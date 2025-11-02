@@ -2,6 +2,7 @@ package com.nsac.badgecollectorserver.controllers;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -74,13 +75,25 @@ public class AppController {
         }
     }
 
+    @Profile("dev")
     @PostMapping("nfc/add-badge/{badgeId}")
     public ResponseEntity<UserDTO> addBadgeToUserWithJwt(@PathVariable int badgeId, @RequestBody String jwt) {
         int userId = Integer.parseInt(jwtService.extractTokenSubject(jwt));
         return addBadgeToUser(userId, badgeId);
     }
-    
 
+    @PostMapping("nfc/add-badge/{badgeId}/nfc-id/{nfcId}")
+    public ResponseEntity<UserDTO> addBadgeToUserWithJwtAndNfcId(@PathVariable int badgeId, @PathVariable String nfcId, @RequestBody String jwt) {
+        int userId = Integer.parseInt(jwtService.extractTokenSubject(jwt));
+        boolean badgeIdAndNfcIdMatch = badgeService.doesBadgeIdMatchNfcId(badgeId, nfcId);
+        if (badgeIdAndNfcIdMatch) {
+            return addBadgeToUser(userId, badgeId);
+        }
+        else {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+    
     @GetMapping("/badges")
     public ResponseEntity<List<BadgeDTO>> getAllBadges() {
         return ResponseEntity.ok(badgeService.getAllBadges());

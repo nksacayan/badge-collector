@@ -37,3 +37,9 @@ you also have to change the env every startup since ip is dynamic
 
 run write_ip sh
 copy the ps script to /mnt/ then run in windows elevated
+
+For spring side:
+spring.profiles.active=dev
+
+For react side:
+VITE_DEV_MODE=true

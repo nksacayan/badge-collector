@@ -24,7 +24,7 @@ public class DataInitializer {
             // Only initialize if no badges exist
             if (badgeRepository.count() == 0) {
                 Badge[] badges = {
-                    createBadge("Explorer", "Unlocked for visiting 50 unique locations.", false, "BRACELET.png"),
+                    createBadge("Explorer", "Unlocked for visiting 50 unique locations.", false, "BRACELET.png", "04:B5:68:61:3E:61:80"),
                     createBadge("Speed Runner", "Earned for completing a challenge in record time.", false, "CONNECTIONS.png"),
                     createBadge("Master Crafter", "Awarded for crafting 500 items.", false, "CROSSWORD.png"),
                     createBadge("Social Butterfly", "Given for interacting with 100 different players.", false, "DRINK.png"),
@@ -51,7 +51,6 @@ public class DataInitializer {
 
             List<Badge> retrievedBadges = badgeRepository.findAll();
             Set<Badge> nicksBadges = new HashSet<>();
-            nicksBadges.add(retrievedBadges.get(0));
             nicksBadges.add(retrievedBadges.get(1));
             nicksBadges.add(retrievedBadges.get(2));
             nicksBadges.add(retrievedBadges.get(19));
@@ -77,18 +76,34 @@ public class DataInitializer {
         };
     }
 
+
+    private String checkBadgeImageFilename(String imageFilename) {
+        if (imageFilename != null && !imageFilename.isBlank()) {
+            return imageFilename;
+        }
+        else {
+            // Derive image filename from name (lowercase, spaces -> hyphens, remove non-alphanumeric/hyphen)
+            String sanitized = imageFilename.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9\\-]", "");
+            return sanitized + ".png";
+        }
+    }
+
     private Badge createBadge(String name, String description, boolean isSecret, String imageFilename) {
         Badge badge = new Badge();
         badge.setName(name);
         badge.setDescription(description);
-        if (imageFilename != null && !imageFilename.isBlank()) {
-            badge.setImageFilename(imageFilename);
-        }
-        else {
-            // Derive image filename from name (lowercase, spaces -> hyphens, remove non-alphanumeric/hyphen)
-            String sanitized = name.toLowerCase().replaceAll("\\s+", "-").replaceAll("[^a-z0-9\\-]", "");
-            badge.setImageFilename(sanitized + ".png");
-        }
+        badge.setNfcTagId(null);
+        badge.setImageFilename(checkBadgeImageFilename(imageFilename));
+        badge.setSecret(isSecret);
+        return badge;
+    }
+
+    private Badge createBadge(String name, String description, boolean isSecret, String imageFilename, String nfcTagId) {
+        Badge badge = new Badge();
+        badge.setName(name);
+        badge.setDescription(description);
+        badge.setNfcTagId(nfcTagId);
+        badge.setImageFilename(checkBadgeImageFilename(imageFilename));
         badge.setSecret(isSecret);
         return badge;
     }
