@@ -1,5 +1,17 @@
+.icon-flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .icon-flex-wrapper img {
-	width: 80%;
+	width: 100%;
+  	height: auto;
+  	object-fit: contain;
+  	aspect-ratio: 1 / 1; /* Optional: forces square images */
+	min-width: 0;
+  	flex-shrink: 1;
 }
 
 .faded {

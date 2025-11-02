@@ -44,12 +44,14 @@ const BadgeGallery = () => {
 	}, []);
 
 	return (
-		<div className="gallery-container">
-			<h2 className="badge-welcome">WELCOME, {user.name.toUpperCase()}</h2>
-			<h3 className="badge-header">YOUR BADGES</h3>
+		<div className='common-flex-container content-top'>
+			<h2 className="badge-welcome uppercase">Welcome, {user.name}</h2>
 
-			<Link to="/leaderboard" className="leaderboard-button common-button">Leaderboard &gt;</Link>
-			<p className="badge-instruction">Click badge for details!</p>
+			<div className='badge-headers-container'>
+				<h3 className="badge-header uppercase">Your Badges</h3>
+				<Link to="/leaderboard" className="leaderboard-button common-button">Leaderboard &gt;</Link>
+				<p className="badge-instruction">Click badge for details!</p>
+			</div>
 
 			<div className="badge-grid">
 				{badges.map(badge => (

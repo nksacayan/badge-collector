@@ -50,7 +50,7 @@ const WelcomePage = () => {
 	}
 
 	return (
-		<div className="welcome-container">
+		<div className='common-flex-container content-center'>
 			<img id="title-logo" src={logo} alt="Logo" />
 
 			<img id="cat-icon" src={bdayCat} alt="Icon" />

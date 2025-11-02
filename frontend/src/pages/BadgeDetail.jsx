@@ -56,30 +56,28 @@ const BadgeDetail = () => {
 
 	if (currentBadge)
 		return (
-			<>
-				<div className="badge-detail-container">
-					{/* Is using navigate here why the scroll is saved? Neat */}
-					<button className="back-button common-button" onClick={() => navigate('/badges')}>Back</button>
-					{currentBadge.owned ? <p className='common-button badge-status earned'>EARNED</p> : <p className='common-button badge-status'>NOT EARNED</p>}
-					{currentBadge.owned ? 
-						<img className='badge-icon'  src={`${apiUrl}/badges/images/${currentBadge.imageFilename}`} alt={currentBadge.name} loading="lazy" /> : 
-						<img className='badge-icon faded' src={`${apiUrl}/badges/images/${currentBadge.imageFilename}`} alt={currentBadge.name} loading="lazy" />
-					}
-					<h1 className="badge-name">{currentBadge.name}</h1>
+			<div className='common-flex-container content-top'>
+				<button className="back-button common-button" onClick={() => navigate('/badges')}>Back</button>
+				{currentBadge.owned ? <p className='common-button badge-status earned'>EARNED</p> : <p className='common-button badge-status'>NOT EARNED</p>}
+				{currentBadge.owned ? 
+					<img className='badge-icon'  src={`${apiUrl}/badges/images/${currentBadge.imageFilename}`} alt={currentBadge.name} loading="lazy" /> : 
+					<img className='badge-icon faded' src={`${apiUrl}/badges/images/${currentBadge.imageFilename}`} alt={currentBadge.name} loading="lazy" />
+				}
+				<div className='badge-verbiage-container'>
+					<h1 className="badge-name uppercase">{currentBadge.name}</h1>
 					<p className="badge-description">{currentBadge.description}</p>
-					{/* Keep navigate here since badges will be dynamic paths */}
 				</div>
-				<footer className='badge-nav-button-footer'>
+				<div className='badge-nav-container'>
 					{previousId !== 0
 						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${previousId}`)}>
 							&#60; Previous
 						</button>}
 					{nextId !== 0
-						&& <button className="badge-nav-button" onClick={() => navigate(`/badge/${nextId}`)}>
+						&& <button className="badge-nav-button badge-nav-button-right" onClick={() => navigate(`/badge/${nextId}`)}>
 							Next &#62;
 						</button>}
-				</footer>
-			</>
+				</div>
+			</div>
 		);
 	else
 		return (

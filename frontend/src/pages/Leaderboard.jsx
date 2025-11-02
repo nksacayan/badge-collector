@@ -1,10 +1,13 @@
 import './Leaderboard.css';
 import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router';
 const apiUrl = import.meta.env.VITE_BACKEND_API_URL;
 
 
 const Leaderboard = () => {
 	const [users, setUsers] = useState([]);
+	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -18,7 +21,7 @@ const Leaderboard = () => {
 	}, []);
 
 	return (
-		<div className="leaderboard-container">
+		<div className='common-flex-container content-top'>
 			<button className="back-button common-button" onClick={() => navigate('/badges')}>Back</button>
 			<h1 className="leaderboard-header">LEADERBOARD</h1>
 			<table border="1">
