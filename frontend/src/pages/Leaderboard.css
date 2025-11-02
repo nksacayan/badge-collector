@@ -7,7 +7,8 @@
 
 table {
   border-collapse: separate;
-  border-spacing: 0 1rem;
+  border-spacing: 0 1.5rem;
+  width: 100%;
 }
 
 table, table td, table th{
@@ -20,9 +21,40 @@ th {
 	font-weight: 500;
 	font-size: 24px;
 	text-transform: uppercase;
+	line-height: 1;
+	
+}
+
+.th-left {
+	text-align: left;
+}
+
+.th-right {
+	text-align: left;	
+	padding-left: 5rem;
 }
 
 td {
 	font-family: 'DMSansStatic';
 	font-weight: 500;
+	text-align: left;
+}
+
+.td-right {
+	padding-left: 5rem;
+}
+
+.td-flex {
+	display: flex;
+	width: 100%;
+}
+
+.td-index {
+	flex: 0 0 3ch;
+	text-align: left;
+}
+
+.td-user {
+	flex: 1 1 auto;
+	min-width: 0;
 }

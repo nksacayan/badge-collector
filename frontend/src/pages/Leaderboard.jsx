@@ -27,8 +27,8 @@ const Leaderboard = () => {
 			<table border="1">
 			<thead>
 				<tr>
-					<th>Player</th>
-					<th>Badges</th>
+					<th className='th-left'>Player</th>
+					<th className='th-right'>Badges</th>
 				</tr>
 			</thead>
 				<tbody>
@@ -36,8 +36,13 @@ const Leaderboard = () => {
 						.sort((a, b) => b.badges.length - a.badges.length)
 						.map((user, index) => (
 						<tr key={user.id || index}>
-							<td>{index + 1}. {user.name}</td>
-							<td>{user.badges.length}</td>
+							<td className='td-left'>
+								<div className='td-flex'>
+									<p className='td-index'>{index + 1}.</p>
+									<p className='td-user'>{user.name}</p>
+								</div>
+							</td>
+							<td className='td-right'>{user.badges.length}</td>
 						</tr>
 						))}
 					</tbody>
