@@ -1,1 +1,3 @@
-Need security for nfc so people can't just type in links. Can't figure out how to send payload with NFC so put some sort of unique calculated hash per badge in the nfc URL
+- Make all names forced uppercase
+- Prod build broke images
+- remove test guys
