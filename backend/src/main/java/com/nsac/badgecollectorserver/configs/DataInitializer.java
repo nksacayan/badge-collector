@@ -21,7 +21,7 @@ public class DataInitializer {
                     createBadge("Friendship Bracelet", "Grab a tray, string, and some beads and and make a bracelet for you or a friend! Bring the finished bracelet to Angela to redeem your badge.", false, "1_BRACELET.png", "04:E0:F4:60:3E:61:80"),
                     createBadge("Hook and Ring", "Challenge a friend to a game of hook and ring. The first to land the ring on the hook 3 times wins. After winning, head to Nick to redeem your badge.", false, "2_HOOK-AND-RING.png", "04:66:7E:62:3E:61:80"),
                     createBadge("Wordle", "Copy this link https://mywordle.strivemath.com/?word=aashc to complete our custom Wordle. Show Angela your completed puzzle to redeem this badge.", false, "3_WORDLE.png", "04:4A:74:61:3E:61:81"),
-                    createBadge("Knot Tying", "Grab some rope and choose one of the three provided knot instructions to follow. Bring your finished knot to Angela to redeem your badge.", false, "4_KNOT.png", "04:E3:E6:60:3E:61:60"),
+                    createBadge("Knot Tying", "Grab some rope and choose one of the three provided knot instructions to follow. Bring your finished knot to Angela to redeem your badge.", false, "4_KNOT.png", "04:E3:E6:60:3E:61:80"),
                     createBadge("Magic Trick", "Learn a magic trick and perform it for Nick and/or Angela. This badge can be done individually or in a group. Redeem your badge from Angela\r\n" + //
                                                 "\r\n" + //
                                                 "Note: Bicycle cards can be found at the camp supply area. Ask Angela if you need other specific supplies.", false, "5_MAGIC-TRICK.png", "04:CE:4E:64:3E:61:80"),
