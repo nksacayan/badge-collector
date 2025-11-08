@@ -48,31 +48,6 @@ public class DataInitializer {
                 
                 badgeRepository.saveAll(Arrays.asList(badges));
             }
-
-            List<Badge> retrievedBadges = badgeRepository.findAll();
-            Set<Badge> nicksBadges = new HashSet<>();
-            nicksBadges.add(retrievedBadges.get(1));
-            nicksBadges.add(retrievedBadges.get(2));
-            nicksBadges.add(retrievedBadges.get(19));
-            Set<Badge> angelasBadges = new HashSet<>();
-            angelasBadges.add(retrievedBadges.get(2));
-            angelasBadges.add(retrievedBadges.get(3));
-            angelasBadges.add(retrievedBadges.get(4));
-
-            if (userRepository.count() == 0) {
-                List<User> users = new ArrayList<>();
-                users.add(User.builder()
-                    .name("Test Nick")
-                    .badges(new HashSet<>(nicksBadges))
-                    .build()
-                );
-                users.add(User.builder()
-                    .name("Test Angela")
-                    .badges(new HashSet<>(angelasBadges))
-                    .build()
-                );
-                userRepository.saveAll(users);
-            }
         };
     }
 

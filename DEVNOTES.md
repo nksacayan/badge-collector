@@ -1,3 +1,2 @@
 - Make all names forced uppercase
 - Prod build broke images
-- remove test guys
